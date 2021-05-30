@@ -5,6 +5,7 @@
             Story-Board
         </title>
         <style>
+            /* css */
             body{
                 
                background-image: url(mountain.jpg);
@@ -33,7 +34,44 @@
             .hword {
                 text-align: center;
                 font-family: Arial, Helvetica, sans-serif;
+                animation-name: color-change;
+                animation-duration: 100s;
             }
+            @keyframes color-change {
+                0% {
+                        color: blue;
+                    }
+                10% {
+                        color: #8e44ad;
+                    }
+                20% {
+                        color: #1abc9c;
+                    }
+                30% {
+                        color: #d35400;
+                    }
+                40% {
+                        color: blue;
+                    }
+                50% {
+                        color: #34495e;
+                    }
+                60% {
+                        color: blue;
+                    }
+                70% {
+                        color: #2980b9;
+                    }
+                80% {
+                        color: #f1c40f;
+                    }
+                90% {
+                        color: #2980b9;
+                    }
+                100%{
+                        color: pink;
+                    }
+            }   
             button {
                 background-color: rgb(9, 157, 255);
                 color: antiquewhite;
@@ -59,6 +97,6 @@
                 <h1><u>Story-Board</u></h1>
             </div>
         </div>
-       <button onclick="window.location.href='charselc.html';">Start</button>
+       <button onclick="window.location.href='charselc.html';">Start</button> /*Start referenced to charsel (another page)*/
     </body>
 </html>
