@@ -1,0 +1,13 @@
+input{
+    width: 70vw;
+    padding: 0%;
+}
+
+#messageBox{
+    width: 60vw;
+    height: 50vh;
+}
+
+button{
+    width: 10vw;
+}
