@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Story-Board
+        </title>
+        <style>
+            /* css */
+            body{
+                
+               background-image: url(mountain.jpg);
+               height: 100%;
+               background-size: cover;
+               background-repeat: no-repeat;
+
+                margin: 0%;
+            }
+            .cover {
+                background-color: rgb(46, 163, 184);
+                top: 20%;
+                left: 31.5%;
+                height: 20%;
+                width: 40%;
+                position: absolute;
+                margin: 2px;
+                transition: .2s;
+                box-shadow: 0px 4px 6px 0px
+                
+
+            }
+            .cover:hover{
+                transform: scale(1.2);
+            }
+            .hword {
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                animation-name: color-change;
+                animation-duration: 100s;
+            }
+            @keyframes color-change {
+                0% {
+                        color: blue;
+                    }
+                10% {
+                        color: #8e44ad;
+                    }
+                20% {
+                        color: #1abc9c;
+                    }
+                30% {
+                        color: #d35400;
+                    }
+                40% {
+                        color: blue;
+                    }
+                50% {
+                        color: #34495e;
+                    }
+                60% {
+                        color: blue;
+                    }
+                70% {
+                        color: #2980b9;
+                    }
+                80% {
+                        color: #f1c40f;
+                    }
+                90% {
+                        color: #2980b9;
+                    }
+                100%{
+                        color: pink;
+                    }
+            }   
+            button {
+                background-color: rgb(9, 157, 255);
+                color: antiquewhite;
+                padding: 8px 20px;
+                border-radius: 15px;
+                font-size: medium;
+                transition:.2s;
+                
+                position: absolute;
+                top: 50%;
+                left: 48%;
+            }
+            button:hover {
+                background-color: black;
+                transform: scale(1.3);
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="cover">
+            <div class="hword">
+                <h1><u>Story-Board</u></h1>
+            </div>
+        </div>
+       <button onclick="window.location.href='charselc.html';">Start</button> /*Start referenced to charsel (another page)*/
+    </body>
+</html>

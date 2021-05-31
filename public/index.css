@@ -1,13 +1,28 @@
-input{
-    width: 70vw;
-    padding: 0%;
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
 }
 
-#messageBox{
-    width: 60vw;
-    height: 50vh;
+body{
+    background-color: rgb(5, 92, 133);
+    margin: 0%;
 }
 
-button{
-    width: 10vw;
+#controllingUser{
+    background-color: rgba(68, 243, 255, 0.411);
+    color: whitesmoke;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 5px;
+}
+
+textarea {
+    padding: 10px;
+    border-radius: 10px;
+    width: 75vw;
+    height: 45vh;
+    margin: 10px;
+    margin-top: 5px;
 }
