@@ -1,8 +1,9 @@
 var socket = io.connect('http://localhost:3000');
-var userId,currentUser,prevLength = 0;
+var userId,currentUserName,prevLength = 0,currentUserId;
 
 userNameInGame = prompt("enter username");
 
+//showing connection
 socket.on('connect', () => {
     console.log("connected to the interwebs server")
 });
@@ -13,27 +14,55 @@ socket.on('messageToClients',(data)=>{
     messageBox.value += data.message;
     prevLength = messageBox.value.length;
 
-    //setting the controlling user (currentUser)
-    currentUser = data.userName;
+    //setting the controlling user (currentUserName)
+    currentUserName = data.userName;
 
-    //showing the controlling user (currentUser)
+    //showing the controlling user (currentUserName)
     var controllingUser = document.getElementById("controllingUser");
-    controllingUser.textContent = "User in control : " + currentUser;
+    controllingUser.textContent = "User in control : " + currentUserName;
 
     console.log("message from server : "+data.message);
 });
 
+//receiving the controlling user from the server & updating game status
+socket.on('sendCurrentUser',(currentUser)=>{
+    currentUserId = currentUser;
 
-//getting user id / user name in the future
+    //updating game status
+    if(currentUserId == userId)
+    {
+        document.getElementById("controllingUser").textContent = "your turn";
+    }
+    else
+    {
+        document.getElementById("controllingUser").textContent = "rotating turns";
+    }
+});
+
+
+//getting user id of this client
 socket.on('getUserId',(user)=>
 {
     userId = user;
 });
 
 
+//doing the onkeyup thing
+document.addEventListener('keyup',()=>{
+    if(userId == currentUserId)
+    {
+        send();
+    }
+    else
+    {
+        var messageBox = document.getElementById("messageBox");
+        messageBox.value = messageBox.value.slice(0,messageBox.value.length - 1);
+        console.log("delete last element");
+    }
+});
+
 //takikng the input and sending to the server
 function send(){
-
 
     //send key up data to server
     //data is the ey code of the key pressed
@@ -51,9 +80,10 @@ function send(){
     //adding message sent by user to messageBox
     var messageBox = document.getElementById("messageBox");
     messageBox.textContent += (data);
-    currentUser = "me";
+    currentUserName = "me";
 
-    //showing the controlling user (currentUser)
+    //showing the controlling user (currentUserName)
     var controllingUser = document.getElementById("controllingUser");
-    controllingUser.textContent = "User in control : " + currentUser;
+    controllingUser.textContent = "User in control : " + currentUserName;
+
 }

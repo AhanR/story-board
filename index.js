@@ -15,7 +15,26 @@ io.on('connection', (client) => {
     console.log(connections);
     client.emit('getUserId',client.id);
 
-    currentUser = 0;
+    //change turn after every 30 seconds
+    if(connections.length > 1)
+    {    
+        setInterval(()=>{
+            if(connections.length>1)
+            {
+                currentUser = (currentUser + 1) % (connections.length) ;
+                io.emit('sendCurrentUser',connections[currentUser]);
+                console.log("turn changes to : "+connections[currentUser]);
+            }
+        },30000);
+    }
+    else if(connections.length == 1)
+    {
+        io.emit('sendCurrentUser','no one else');
+    }
+    else if(connections.length == 0)
+    {
+        console.log("no users connected");
+    }
 
     //message from the user to the server is parsed here.
     client.on('messgeToServer', (data)=>
@@ -25,6 +44,19 @@ io.on('connection', (client) => {
         {
             client.broadcast.emit('messageToClients',data);
             console.log("message was broadcast");
+        }
+    });
+
+    //disconnecting the user from the game
+    client.on('disconnect',()=>{
+        console.log("Trying to find disconnected user");
+        for(var i = 0 ; i<=connections.length ; i++)
+        {
+            if(client.id == connections[i])
+            {
+                connections.splice(i,1);
+                console.log(client.id + " was disconnected")
+            }
         }
     });
 });
