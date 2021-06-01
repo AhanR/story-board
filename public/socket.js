@@ -1,6 +1,8 @@
 var socket = io.connect('http://localhost:3000');
 var userId,currentUser,prevLength = 0;
 
+userNameInGame = prompt("enter username");
+
 socket.on('connect', () => {
     console.log("connected to the interwebs server")
 });
@@ -37,10 +39,10 @@ function send(){
     //data is the ey code of the key pressed
     //userData is the object that is being sent and broadcast
     var data = document.getElementById("messageBox").value;
-    if(data.length != prevLength && data != "")
+    if(data.length > prevLength && data != "")
     {    
         data = data.slice(-1);
-        var userData = { userName : userId , message : data };
+        var userData = { userName : userNameInGame , clientId : userId , message : data };
         socket.emit('messgeToServer',userData);
         console.log("me :" + data);
         prevLength = data.length;
