@@ -15,7 +15,7 @@ io.on('connection', (client) => {
     console.log(connections);
     client.emit('getUserId',client.id);
 
-    //change turn after every 30 seconds
+    //change turn after every 15 seconds
     if(connections.length > 1)
     {    
         setInterval(()=>{
@@ -25,7 +25,7 @@ io.on('connection', (client) => {
                 io.emit('sendCurrentUser',connections[currentUser]);
                 console.log("turn changes to : "+connections[currentUser]);
             }
-        },30000);
+        },15000);
     }
     else if(connections.length == 1)
     {

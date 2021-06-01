@@ -1,5 +1,5 @@
 var socket = io.connect('http://localhost:3000');
-var userId,currentUserName,prevLength = 0,currentUserId;
+var userId,currentUserName,prevLength = 0,currentUserId,wordLength = 0;
 
 userNameInGame = prompt("enter username");
 
@@ -57,7 +57,6 @@ document.addEventListener('keyup',()=>{
     {
         var messageBox = document.getElementById("messageBox");
         messageBox.value = messageBox.value.slice(0,messageBox.value.length - 1);
-        console.log("delete last element");
     }
 });
 
@@ -70,11 +69,16 @@ function send(){
     var data = document.getElementById("messageBox").value;
     if(data.length > prevLength && data != "")
     {    
-        data = data.slice(-1);
-        var userData = { userName : userNameInGame , clientId : userId , message : data };
-        socket.emit('messgeToServer',userData);
-        console.log("me :" + data);
-        prevLength = data.length;
+        wordLength++;
+        if(data[data.length - 1] == " " || data[data.length - 1] == '\n')
+        {
+            data = data.slice(-wordLength);
+            var userData = { userName : userNameInGame , clientId : userId , message : data };
+            socket.emit('messgeToServer',userData);
+            console.log("me :" + data);
+            prevLength = data.length;
+            wordLength = 0;
+        }
     }
 
     //adding message sent by user to messageBox
