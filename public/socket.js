@@ -1,6 +1,5 @@
 var socket = io.connect('http://localhost:3000');
 var userId,currentUserName,prevLength = 0,currentUserId,wordLength = 0;
-var prevChar = "";
 
 userNameInGame = prompt("enter username");
 
@@ -37,7 +36,6 @@ socket.on('sendCurrentUser',(currentUser)=>{
     else
     {
         document.getElementById("controllingUser").textContent = "rotating turns";
-        prevChar = "";
     }
 });
 
@@ -49,42 +47,11 @@ socket.on('getUserId',(user)=>
 });
 
 
-//checking when to call the send() function & when to send a 'deleted' handler
-//preventing user from typing when not turn
-document.addEventListener('keyup',(e)=>{
-
-    var data = document.getElementById("messageBox").value;
+//doing the onkeyup thing
+document.addEventListener('keyup',()=>{
     if(userId == currentUserId)
     {
-        if(prevLength > data.length)
-        {
-            //this does not work
-            //-------------------------------please look at this---------------------------
-            wordLength--;
-            prevLength = data.length;
-            if(prevChar == " ")
-            {
-                console.log("correcting spaces")
-                var messageBox = document.getElementById("messageBox");
-                messageBox.value += " ";
-            }
-            else if(prevChar == "\n")
-            {
-                var messageBox = document.getElementById("messageBox");
-                messageBox.value += "\n";
-            }
-            else if(prevChar == "")
-            {
-                var messageBox = document.getElementById("messageBox");
-                messageBox.value += " ";
-            }
-        }
-        else
-        {
-            send();
-        }
-        prevChar = data[data.length - 1];
-
+        send();
     }
     else
     {
@@ -99,16 +66,19 @@ function send(){
     //send key up data to server
     //data is the ey code of the key pressed
     //userData is the object that is being sent and broadcast
-    var data = document.getElementById("messageBox").value;   
-    wordLength++;
-    if(data[data.length - 1] == " " || data[data.length - 1] == '\n')
-    {
-        data = data.slice(-wordLength);
-        var userData = { userName : userNameInGame , clientId : userId , message : data };
-        socket.emit('messgeToServer',userData);
-        console.log("me :" + data);
-        prevLength = data.length;
-        wordLength = 0;
+    var data = document.getElementById("messageBox").value;
+    if(data.length > prevLength && data != "")
+    {    
+        wordLength++;
+        if(data[data.length - 1] == " " || data[data.length - 1] == '\n')
+        {
+            data = data.slice(-wordLength);
+            var userData = { userName : userNameInGame , clientId : userId , message : data };
+            socket.emit('messgeToServer',userData);
+            console.log("me :" + data);
+            prevLength = data.length;
+            wordLength = 0;
+        }
     }
 
     //adding message sent by user to messageBox
