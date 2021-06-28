@@ -1,18 +1,143 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="index.css">
-        <title>
-            Story Board
-        </title>
-        <meta http-equiv="X-UA-Compatible" content="IE=7">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <meta name="description" content="write a story together with a shared text editor">
+        <title>Story-Board</title>
+        <style>
+            body{
+                background-color: rgb(0, 74, 134);
+                margin: 0%;
+            }
+            .leaderboard{
+                background-color: aliceblue;
+                border-radius: 10px;
+                position: absolute;
+                height: 86%;
+                width: 18%;
+                right: 2%;
+                top: 4%;
+            }
+            .leaderboard h3{
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+            }
+            .box-container{
+                background-color: antiquewhite;
+                border-radius: 10px;
+                position: absolute;
+                width: 70%;
+                height: 86%;
+                left: 2%;
+                top: 4%;
+            }
+            .box-container .voted-storybox{
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px 1px; /* added this just to differentiate between box container and voted box */
+                position: absolute;
+                width: 91%;
+                height: 70%;
+                left: 4%;
+                top: 5%;
+            }
+            .box-container .enter-box{
+                font-size: large;
+                font-family: Arial, Helvetica, sans-serif;
+                border-radius: 10px;
+                position: absolute;
+                width: 78%;
+                left: 4%;
+                bottom: 5%;
+            }
+            .box-container button{
+                border-radius: 50px; /* circle button hoga similar to whatsapp*/
+                padding: 8px 10px;
+                position: absolute;
+                bottom: 5.5%;
+                right: 10%;
+            }
+            .popup-container{
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                background-color: rgba(0,0,0, 0.6);
+                z-index: 1001;
+            }
+            .popup-screen{
+                width: 350px;
+                height: 250px;
+                background-color: rgb(16, 67, 161);
+                border-radius: 10px;
+                box-shadow: 1px 4px 10px 3px;
+                position: absolute;
+                left: 35%;
+                top: 30%;   
+            }
+            .popup-screen h2{
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                color: antiquewhite;
+                
+            }
+            .popup-screen input{
+                font-size: larger;
+                position: absolute;
+                left: 15%;
+                top: 35%;
+            }
+            .popup-screen button{
+                background-color: white;
+                font-size: large;
+                border-radius: 10px;
+                padding: 4px 10px;
+                position: absolute;
+                bottom: 30%;
+                left: 40%;
+            }
+            
+        </style>
     </head>
     <body>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="socket.js"></script>
-        <div id="controllingUser">waiting for game to begin..</div>
-        <textarea style="resize: none" rows="30" cols="62" id="messageBox"></textarea>
+        <script>
+            function check(){
+                if (document.getElementById('enter-name').value.length==0){ //enter-name refers to popup textbox
+                    alert("For fuck sake Enter your username daug!!!");
+                }
+                else{
+                    window.onclick=document.getElementById('submit-user').style.display='none';
+                }
+
+            }
+           
+        </script>
+        <!-- __________________ Starting Popup ______________ -->
+        <div class="popup-container" id="submit-user">
+            <div class="popup-screen">
+                    <h2>Enter Username</h2>
+                    <input type="text" placeholder="Username" id="enter-name" required>
+                    <button type="submit" onclick="check()">Enter</button>
+            </div>
+        </div>
+        <!-- __________________ Main page ___________________ -->
+        <div class="leaderboard">
+            <!-- Leaderboard -->
+            <h3>leaderboard</h3>
+        </div>
+
+        <div class="box-container">
+            <!-- The chat box thingy?? container-->
+            
+            <div class="voted-storybox">
+                <!-- Selected/voted sentences to be displayed here 
+                    ____White blank container to displaye voted sentences___
+                -->
+            </div>
+
+            <div>
+                <!-- ______________Textarea________________________-->
+                <textarea class="enter-box" style="resize: none;"></textarea>
+                <button type="submit">Enter</button>
+
+            </div>
+        </div>
     </body>
 </html>
