@@ -1,8 +1,6 @@
 var socket = io.connect('http://localhost:3000');
 var userId,currentUserName,prevLength = 0,currentUserId,wordLength = 0;
 
-userNameInGame = prompt("enter username");
-
 //showing connection
 socket.on('connect', () => {
     console.log("connected to the interwebs server")
