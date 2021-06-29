@@ -1,176 +1,197 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Story-Board</title>
-        <style>
-            body{
-                background-color: rgb(0, 74, 134);
-                margin: 0%;
-            }
-            .leaderboard{
-                background-color: rgb(79, 163, 236);
-                border-radius: 10px;
-                position: absolute;
-                height: 86%;
-                width: 24%;
-                right: 2%;
-                top: 4%;
-            }
-            .leaderboard h3{
-                font-family: Arial, Helvetica, sans-serif;
-                color: antiquewhite;
-                text-align: center;
-            }
-            .box-container{
-                background-color: rgb(79, 163, 236);
-                border-radius: 10px;
-                width: 70vw;
-                height: 86vh;
-                position: absolute;
-                left: 2%;
-                top: 4%;
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                align-items: center;
-            }
-            .box-container > .voted-storybox{
-                background-color: antiquewhite;
-                border-radius: 10px;
-                width: 94%;
-                height: 70%;
-                /* box-shadow: 0px 4px 8px 1px;*/
-                /* position: absolute; */
-                /* left: 4%; */
-                /* top: 5%; */
-            }
-            .box-container .enter-box{
-                font-size: large;
-                font-family: Arial, Helvetica, sans-serif;
-                border-radius: 10px;
-                width: 88%;
-                background-color: antiquewhite;
-                /* position: absolute; */
-                /* left: 4%; */
-                /* bottom: 5%; */
-            }
-            .box-container button{
-                border-radius: 10px;
-                padding: 8px 10px;
-                border: none;
-                width: 10%;
-                background-color: antiquewhite;
-                /* position: absolute; */
-                /* bottom: 5.5%; */
-                /* right: 10%; */
-            }
-            .text-area{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                width: 94%;
-            }
-            .popup-container{
-                position: fixed;
-                height: 100vh;
-                width: 100vw;
-                background-color: rgba(255, 255, 255, 0.6);
-                z-index: 1001;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .popup-screen{
-                /*maintain 3:2 width:height*/
-                width: 390px;
-                height: 260px;
-                background-color: rgb(16, 67, 161);
-                border-radius: 10px;
-                box-shadow: 1px 4px 10px 3px;
-                display: flex;
-                justify-content: space-around;
-                flex-direction: column;
-                align-items: center;
-                /* position: absolute;
+
+<head>
+    <title>Story-Board</title>
+    <style>
+        body {
+            background-color: rgb(0, 74, 134);
+            margin: 0%;
+        }
+
+        .leaderboard {
+            background-color: rgb(79, 163, 236);
+            border-radius: 10px;
+            position: absolute;
+            height: 86%;
+            width: 24%;
+            right: 2%;
+            top: 4%;
+        }
+
+        .leaderboard h3 {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: antiquewhite;
+            text-align: center;
+        }
+
+        .box-container {
+            background-color: rgb(79, 163, 236);
+            border-radius: 10px;
+            width: 70vw;
+            height: 86vh;
+            position: absolute;
+            left: 2%;
+            top: 4%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .box-container>.voted-storybox {
+            background-color: antiquewhite;
+            border-radius: 10px;
+            width: 94%;
+            height: 70%;
+            padding: 10px;
+            /* box-shadow: 0px 4px 8px 1px;*/
+            /* position: absolute; */
+            /* left: 4%; */
+            /* top: 5%; */
+        }
+
+        .box-container .enter-box {
+            font-size: large;
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 10px;
+            width: 88%;
+            background-color: antiquewhite;
+            /* position: absolute; */
+            /* left: 4%; */
+            /* bottom: 5%; */
+        }
+
+        .box-container button {
+            border-radius: 10px;
+            padding: 8px 10px;
+            border: none;
+            width: 10%;
+            background-color: antiquewhite;
+            /* position: absolute; */
+            /* bottom: 5.5%; */
+            /* right: 10%; */
+        }
+
+        .text-area {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 94%;
+        }
+
+        .popup-container {
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(255, 255, 255, 0.6);
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-screen {
+            /*maintain 3:2 width:height*/
+            width: 390px;
+            height: 260px;
+            background-color: rgb(16, 67, 161);
+            border-radius: 10px;
+            box-shadow: 1px 4px 10px 3px;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+            /* position: absolute;
                 left: 35%;
                 top: 30%;*/
-            }
-            .popup-screen h2{
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: center;
-                color: antiquewhite;
-                margin: 0%;
-                margin-top: 20px;
-            }
-            .popup-screen input{
-                font-size: larger;
-                width: 65%;
-                border-radius: 10px;
-                padding: 5px;
-                border: none;
-                text-align: center;
-                /* position: absolute;
+        }
+
+        .popup-screen h2 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: antiquewhite;
+            margin: 0%;
+            margin-top: 20px;
+        }
+
+        .popup-screen input {
+            font-size: larger;
+            width: 65%;
+            border-radius: 10px;
+            padding: 5px;
+            border: none;
+            text-align: center;
+            /* position: absolute;
                 left: 15%;
                 top: 35%; */
-            }
-            .popup-screen button{
-                background-color: antiquewhite;
-                font-size: large;
-                border-radius: 10px;
-                padding: 4px 10px;
-                width: 20%;
-                border: none;
-                /* position: absolute;
+        }
+
+        .popup-screen button {
+            background-color: antiquewhite;
+            font-size: large;
+            border-radius: 10px;
+            padding: 4px 10px;
+            width: 20%;
+            border: none;
+            /* position: absolute;
                 bottom: 30%;
                 left: 40%; */
-            }
-            
-        </style>
-    </head>
-    <body>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="./socket.js"></script>
-        <script>
-            function check(){
-                if (document.getElementById('enter-name').value.length==0){ //enter-name refers to popup textbox
-                    alert("For fuck sake Enter your username daug!!!");
-                }
-                else{
-                    window.onclick=document.getElementById('submit-user').style.display='none';
-                }
+        }
+    </style>
+</head>
 
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./socket.js"></script>
+    <script>
+        function check() {
+            if (document.getElementById('enter-name').value.length == 0) { //enter-name refers to popup textbox
+                alert("For fuck's sake enter your username daug!!!");
             }
-           
-        </script>
-        <!-- __________________ Starting Popup ______________ -->
-        <div class="popup-container" id="submit-user">
-            <div class="popup-screen">
-                    <h2>Enter Username</h2>
-                    <input type="text" placeholder="Username" id="enter-name" required>
-                    <button type="submit" onclick="check()">Enter</button>
-            </div>
-        </div>
-        <!-- __________________ Main page ___________________ -->
-        <div class="leaderboard">
-            <!-- Leaderboard -->
-            <h3>leaderboard</h3>
-        </div>
+            else {
+                userName = document.getElementById('enter-name').value;
+                var userState = { name: userName, id: userId, line: "" };
+                socket.emit("new-player", userState, (gameState) => {
+                    playerStates = gameState.playerStates;
+                    addStoryToBox(gameState.story);
+                });
+                window.onclick = document.getElementById('submit-user').style.display = 'none';
+            }
 
-        <div class="box-container">
-            <!-- The chat box thingy?? container-->
-            
-            <div class="voted-storybox">
-                <!-- Selected/voted sentences to be displayed here 
+        }
+
+    </script>
+    <!-- __________________ Starting Popup ______________ -->
+    <div class="popup-container" id="submit-user">
+        <div class="popup-screen">
+            <h2>Enter Username</h2>
+            <input type="text" placeholder="Username" id="enter-name" required>
+            <button type="submit" onclick="check()">Enter</button>
+        </div>
+    </div>
+    <!-- __________________ Main page ___________________ -->
+    <div class="leaderboard">
+        <!-- Leaderboard -->
+        <h3>leaderboard</h3>
+    </div>
+
+    <div class="box-container">
+        <!-- main story board-->
+
+        <div class="voted-storybox" id = "voted-storybox">
+            <!-- Selected/voted sentences to be displayed here 
                     ____White blank container to displaye voted sentences___
                 -->
-            </div>
-
-            <div class="text-area">
-                <!-- ______________Textarea________________________-->
-                <textarea class="enter-box" style="resize: none;"></textarea>
-                <button type="submit">Enter</button>
-            </div>
-
         </div>
-    </body>
+
+        <div class="text-area">
+            <!-- ______________Textarea________________________-->
+            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
+            <button class="input-button" onclick="sendStoryLine()">enter</button>
+        </div>
+
+    </div>
+</body>
+
 </html>

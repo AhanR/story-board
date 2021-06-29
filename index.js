@@ -1,65 +1,61 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const server  = app.listen(3000);
+const server = app.listen(3000, {
+    cors: {
+        origin: ["https://localhost:8080"]
+    }
+});
 var connections = [];
-var currentUser = 0;
 
 const io = require('socket.io')(server);
 const socket = require('socket.io');
 
-//connection time stuff
-io.on('connection', (client) => {
-    console.log(client.id);
-    connections.push(client.id);
-    console.log(connections);
-    client.emit('getUserId',client.id);
 
-    //change turn after every 15 seconds
-    if(connections.length > 1)
-    {    
-        setInterval(()=>{
-            if(connections.length>1)
-            {
-                currentUser = (currentUser + 1) % (connections.length) ;
-                io.emit('sendCurrentUser',connections[currentUser]);
-                console.log("turn changes to : "+connections[currentUser]);
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+var playerStates = [] , flag = 0 , gameState = {story : "how are you" , playerStates : playerStates};
+io.on("connection", (client) => {
+
+    client.emit("user-id", client.id);
+    playerStates.push({ name: "", id: client.id, line: "" })
+
+    client.on("new-player", (player, cb) => {
+
+        for (var i = 0; i < playerStates.length; i++) {
+            if (player.id == playerStates[i].id) {
+                playerStates[i].name = player.name;
+                console.log(playerStates[i].name + " connected");
+                cb(gameState);
             }
-        },15000);
-    }
-    else if(connections.length == 1)
-    {
-        io.emit('sendCurrentUser','no one else');
-    }
-    else if(connections.length == 0)
-    {
-        console.log("no users connected");
-    }
+        }
 
-    //message from the user to the server is parsed here.
-    client.on('messgeToServer', (data)=>
-    {
-        console.log(data)
-        if(`${data.clientId}` == `${connections[currentUser]}`)
+    });
+
+    client.on("send-story-line", storyLine => {
+
+        for (var i = 0; i < playerStates.length; i++)
         {
-            client.broadcast.emit('messageToClients',data);
-            console.log("message was broadcast");
+            if (storyLine.id == playerStates[i].id)
+            {
+                playerStates[i].line = storyLine.line;
+                console.log(playerStates[i].name + " wrote " + playerStates[i].line);
+                io.emit('story-lines',playerStates);
+                flag++;
+            }
         }
     });
 
-    //disconnecting the user from the game
-    client.on('disconnect',()=>{
-        console.log("Trying to find disconnected user");
-        for(var i = 0 ; i<=connections.length ; i++)
-        {
-            if(client.id == connections[i])
-            {
-                connections.splice(i,1);
+    client.on("disconnect", () => {
+        for (var i = 0; i < playerStates.length; i++) {
+            if (client.id == playerStates[i].id) {
+                playerStates.splice(i, 1);
                 console.log(client.id + " was disconnected")
             }
         }
     });
-});
+})
 
 //loading static libraries
 app.use(express.static(path.join(__dirname, 'public')))
