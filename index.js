@@ -15,7 +15,7 @@ const socket = require('socket.io');
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-var playerStates = [] , flag = 0 , gameState = {story : "how are you" , playerStates : playerStates};
+var playerStates = [] , flag = 0 , gameState = {story : "" , playerStates : playerStates};
 io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
@@ -55,7 +55,16 @@ io.on("connection", (client) => {
             }
         }
     });
-})
+});
+
+function resetGameState()
+{
+    $.getJSON("firstLines.json", function (data) {
+        console.log(data);
+        // data.lines[Math.random()];
+        // reset game state and call it when number of users reaches to 0
+    });
+}
 
 //loading static libraries
 app.use(express.static(path.join(__dirname, 'public')))
