@@ -1,26 +1,25 @@
 var socket = io.connect('http://localhost:3000');
 var userId, userName, playerStates = [] , story = "";
+var counter = 0;
 
 socket.on("user-id", id =>{
     userId = id;
 });
 
-socket.on('story-lines',storyLines => {
-    playerStates = storyLines;
-    updateLeaderBoard();
+socket.on('new-story-line',line => {
+    addStoryToBox(line);
 });
 
-socket.on('player-left',playerStatesNew => {
+socket.on('update-player-state',playerStatesNew => {
     playerStates = playerStatesNew;
     updateLeaderBoard();
 });
 
 function sendStoryLine() {
     if (document.getElementById('enter-box').value != "") {
-        console.log(document.getElementById('enter-box').value);
         socket.emit("send-story-line", {line : document.getElementById('enter-box').value , id : userId});
         document.getElementById('enter-box').value = "";
-        var vote = prompt("add vote","id");
+        var vote = prompt("add vote");
         castVote(vote);
     }
 }
@@ -35,8 +34,9 @@ function updateLeaderBoard()
     document.getElementById("leaderboard").innerHTML = "<h3>leaderboard</h3>";
     for(var i = 0; i < playerStates.length; i++)
     {
-        document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}  ${playerStates[i].score}</div>`;
+        document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
     }
+    console.log("ldrbrd updated " + counter++);
 }
 
 function castVote(vote)
