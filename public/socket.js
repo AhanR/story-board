@@ -8,14 +8,19 @@ socket.on("user-id", id =>{
 socket.on('story-lines',storyLines => {
     playerStates = storyLines;
     updateLeaderBoard();
-})
+});
+
+socket.on('player-left',playerStatesNew => {
+    playerStates = playerStatesNew;
+    updateLeaderBoard();
+});
 
 function sendStoryLine() {
     if (document.getElementById('enter-box').value != "") {
         console.log(document.getElementById('enter-box').value);
         socket.emit("send-story-line", {line : document.getElementById('enter-box').value , id : userId});
         document.getElementById('enter-box').value = "";
-        var vote = alert("add vote","<vote>");
+        var vote = prompt("add vote","id");
         castVote(vote);
     }
 }
@@ -28,10 +33,9 @@ function addStoryToBox(storyLine){
 function updateLeaderBoard()
 {
     document.getElementById("leaderboard").innerHTML = "<h3>leaderboard</h3>";
-    console.log("updating leaderboard");
     for(var i = 0; i < playerStates.length; i++)
     {
-        document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}   ${playerStates[i].score}<div>`;
+        document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}  ${playerStates[i].score}</div>`;
     }
 }
 

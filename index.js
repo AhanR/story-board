@@ -29,7 +29,7 @@ io.on("connection", (client) => {
                 cb(gameState);
             }
         }
-
+        console.log(playerStates);
     });
 
     client.on("send-story-line", storyLine => {
@@ -51,7 +51,8 @@ io.on("connection", (client) => {
         {
             if(vote == playerStates[i].id)
             {
-                playerStates[i].id++;
+                console.log("vote cast");
+                playerStates[i].votes++;
                 notAPlayer = 1;
                 flag++;
             }
@@ -66,17 +67,20 @@ io.on("connection", (client) => {
                 if(playerStates[i].votes >= winnerVotes)
                 {
                     winner = i;
+                    
                 }
             }
             playerStates[winner].score++;
-            gameState.story += playerStates[i].line;
-            client.emit('new-story-line',playerStates[i].line);
+            gameState.story += playerStates[winner].line;
+            client.emit('new-story-line',playerStates[winner].line);
+            console.log(playerStates[winner].name);
             //clearing off the array the next round
             for(var i = 0; i < playerStates.length; i++)
             {
                 playerStates[i].line = ""
                 playerStates[i].votes = 0;
             }
+            console.log(playerStates);
             flag = 0;
         }
     });
@@ -88,6 +92,7 @@ io.on("connection", (client) => {
                 console.log(client.id + " was disconnected")
             }
         }
+        client.emit('player-left',playerStates)
         if(playerStates.length == 0)
         {
             resetGameState();
