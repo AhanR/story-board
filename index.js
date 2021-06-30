@@ -18,7 +18,7 @@ io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
     console.log(client.id);
-    playerStates.push({ name: "", id: client.id, line: "" , score : 0, votes : 0})
+    playerStates.push({ name: "untitled", id: client.id, line: "" , score : 0, votes : 0})
 
     client.on("new-player", (player, cb) => {
 
@@ -52,7 +52,7 @@ io.on("connection", (client) => {
         {
             if(vote == playerStates[i].id)
             {
-                console.log("vote cast");
+                console.log("vote cast " + playerStates[i].name);
                 playerStates[i].votes++;
                 notAPlayer = 1;
                 flag++;

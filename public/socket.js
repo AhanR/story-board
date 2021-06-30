@@ -1,6 +1,12 @@
 var socket = io.connect('http://localhost:3000');
-var userId, userName, playerStates = [] , story = "";
+var userId, userName = "", playerStates = [] , story = "";
 var counter = 0;
+
+window.onload = ()=>{
+    document.getElementById('vote-box').style.display='none';
+    document.getElementById('prevent-player').style.display='none'
+    document.getElementById('popup-vote').innerHTML = "";
+}
 
 socket.on("user-id", id =>{
     userId = id;
@@ -8,19 +14,22 @@ socket.on("user-id", id =>{
 
 socket.on('new-story-line',line => {
     addStoryToBox(line);
+    document.getElementById('vote-box').style.display='none';
+    document.getElementById('prevent-player').style.display='none'
+    document.getElementById('popup-vote').innerHTML = "";
 });
 
 socket.on('update-player-state',playerStatesNew => {
     playerStates = playerStatesNew;
     updateLeaderBoard();
+    updateVoteBox();
 });
 
 function sendStoryLine() {
     if (document.getElementById('enter-box').value != "") {
         socket.emit("send-story-line", {line : document.getElementById('enter-box').value , id : userId});
         document.getElementById('enter-box').value = "";
-        var vote = prompt("add vote");
-        castVote(vote);
+        document.getElementById('vote-box').style.display='block';
     }
 }
 
@@ -39,13 +48,41 @@ function updateLeaderBoard()
     console.log("ldrbrd updated " + counter++);
 }
 
-function castVote(vote)
+function updateVoteBox()
 {
+    document.getElementById("popup-vote").innerHTML = "";
+    for(var i = 0; i < playerStates.length; i++)
+    {
+        if(playerStates[i].line != "")
+        {
+            if (playerStates[i].id != userId) {
+                document.getElementById("popup-vote").innerHTML +=
+                `<div class="pop-back${i + 1}">
+                <div class="text-box" readonly disabled >${playerStates[i].line}</div>
+                <button onclick = "castVote(${i})"><b>Vote for ${playerStates[i].name}</b></button>
+                </div>`
+            }
+            else
+            {
+                document.getElementById("popup-vote").innerHTML +=
+                `<div class="pop-back${i + 1}">
+                <div class="text-box" readonly disabled >${playerStates[i].line}</div>
+                <button><b>can't vote for self</b></button>
+                </div>`
+            }
+        }
+    }
+}
+
+function castVote(index)
+{
+    var vote = playerStates[index].id;
     socket.emit('cast-vote',vote, (voteCast) => {
         if(!voteCast)
         alert("voting failed, start contemplting life");
     });
-    //apply global popup and prevent user form voting
+    console.log("casting vote");
+    document.getElementById('prevent-player').style.display='block'
 }
 
 // document.getElementById("controllingUser").textContent = "rotating turns";

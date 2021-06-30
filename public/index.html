@@ -87,7 +87,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            width: 94%;
+            width: 96%;
         }
 
         .popup-container {
@@ -138,9 +138,122 @@
             padding: 4px 10px;
             width: 20%;
             border: none;
-            /* position: absolute;
-                bottom: 30%;
-                left: 40%; */
+        }
+
+        /* vote-box */
+        .pop-back {
+            display: none;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: 1002;
+
+        }
+
+        .popup-vote {
+            width: 100%;
+            height: 700px;
+            background-color: rgb(16, 67, 161);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            /*Scroll situation where x-axis is hidden well as we dont need x axis to be scrollable*/
+            overflow-x: hidden;
+            overflow-y: scroll;
+            /* Made y-axis scrollable becoz that's what we need*/
+            position: absolute;
+            left: 0%;
+            top: 0%;
+        }
+
+        .popup-vote>div {
+            height: max-content;
+            min-width: 50px;
+            width: max-content;
+            max-width: 20%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 5px;
+            border-width: 5px;
+            margin: 5px;
+        }
+
+        .popup-vote > textarea {
+            resize: none;
+            outline: none;
+        }
+
+        .text-box {
+            background-color: antiquewhite;
+            width: 90%;
+            height: max-content;
+            max-height: 100%;
+            border-radius: 10px;
+            word-wrap: normal;
+            text-align: center;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .popup-vote button {
+            border-radius: 10px;
+            border: none;
+            width: 90%;
+            margin: 5px;
+        }
+
+        .popup-vote .pop-back1 {
+            /* border-color: blueviolet; */
+            background-color: blueviolet;
+        }
+
+        .popup-vote .pop-back2 {
+            /* border-color: rgb(226, 95, 43); */
+            background-color: rgb(226, 95, 43);
+        }
+
+        .popup-vote .pop-back3 {
+            /* border-color: rgb(226, 214, 43); */
+            background-color: rgb(226, 214, 43);
+        }
+
+        .popup-vote .pop-back4 {
+            /* border-color: rgb(108, 197, 25); */
+            background-color: rgb(108, 197, 25);
+        }
+
+        .popup-vote .pop-back5 {
+            /* border-color: rgb(25, 197, 174); */
+            background-color: rgb(25, 197, 174);
+        }
+
+        .popup-vote .pop-back6 {
+            /* border-color: rgb(64, 19, 102); */
+            background-color: rgb(79,163,236);
+        }
+
+        .popup-vote .pop-back7 {
+            /* border-color: rgb(221, 52, 255); */
+            background-color: (221, 52, 255);
+        }
+
+        .popup-vote .pop-back8 {
+            /* border-color: rgb(121, 10, 10); */
+            background-color: rgb(121, 10, 10);
+        }
+
+        .prevent-player {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(250, 235, 215, 0.377);
+            z-index: 1050;
+            position: absolute;
+            top: 0%;
+            left: 0%;
         }
     </style>
 </head>
@@ -162,7 +275,6 @@
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
             }
-
         }
     </script>
     <!-- __________________ Starting Popup ______________ -->
@@ -189,10 +301,19 @@
         <div class="text-area">
             <!-- ___________________Textarea________________________-->
             <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
-            <button class="input-button" onclick="sendStoryLine()">enter</button>
+            <button class="input-button" onclick="sendStoryLine()" >enter</button>
         </div>
 
     </div>
+
+    <!-- _____________________POPUP on clicking enter (Voting box)_________________ -->
+    <div class="pop-back" id="vote-box">
+        <div class="popup-vote" id="popup-vote">
+            <!-- slots will be appended here -->
+        </div>
+    </div>
+
+    <div class="prevent-player" id="prevent-player" onclick="alert(`voting in progress`)" onkeyup="alert(`voting in progress`)">Voting in progress...</div>
 </body>
 
 </html>
