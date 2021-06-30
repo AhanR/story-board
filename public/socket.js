@@ -7,6 +7,7 @@ socket.on("user-id", id =>{
 
 socket.on('story-lines',storyLines => {
     playerStates = storyLines;
+    updateLeaderBoard();
 })
 
 function sendStoryLine() {
@@ -14,12 +15,33 @@ function sendStoryLine() {
         console.log(document.getElementById('enter-box').value);
         socket.emit("send-story-line", {line : document.getElementById('enter-box').value , id : userId});
         document.getElementById('enter-box').value = "";
+        var vote = alert("add vote","<vote>");
+        castVote(vote);
     }
 }
 
 function addStoryToBox(storyLine){
     story += storyLine;
     document.getElementById("voted-storybox").textContent = story;
+}
+
+function updateLeaderBoard()
+{
+    document.getElementById("leaderboard").innerHTML = "<h3>leaderboard</h3>";
+    console.log("updating leaderboard");
+    for(var i = 0; i < playerStates.length; i++)
+    {
+        document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}   ${playerStates[i].score}<div>`;
+    }
+}
+
+function castVote(vote)
+{
+    socket.emit('cast-vote',vote, (voteCast) => {
+        if(!voteCast)
+        alert("voting failed, start contemplting life");
+    });
+    //apply global popup and prevent user form voting
 }
 
 // document.getElementById("controllingUser").textContent = "rotating turns";

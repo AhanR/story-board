@@ -6,14 +6,10 @@ const server = app.listen(3000, {
         origin: ["https://localhost:8080"]
     }
 });
-var connections = [];
 
 const io = require('socket.io')(server);
 const socket = require('socket.io');
 
-
-//-----------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------
 const firstLines = require('./firstLines');
 const numberOfFirstLines = 30;
 
@@ -21,7 +17,8 @@ var playerStates = [] , flag = 0 , gameState = {story : "A long time ago " , pla
 io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
-    playerStates.push({ name: "", id: client.id, line: "" })
+    console.log(client.id);
+    playerStates.push({ name: "", id: client.id, line: "" , score : 0, votes : 0})
 
     client.on("new-player", (player, cb) => {
 
@@ -44,12 +41,43 @@ io.on("connection", (client) => {
                 playerStates[i].line = storyLine.line;
                 console.log(playerStates[i].name + " wrote " + playerStates[i].line);
                 io.emit('story-lines',playerStates);
+            }
+        }
+    });
+
+    client.on('cast-vote',(vote,cb) =>{
+        var notAPlayer = 0;
+        for(var i =0; i < playerStates.length; i++)
+        {
+            if(vote == playerStates[i].id)
+            {
+                playerStates[i].id++;
+                notAPlayer = 1;
                 flag++;
             }
         }
+        cb((notAPlayer)?true:false);
         if(flag == playerStates.length)
         {
-            console.log("voting begins");
+            console.log("countitng votes");
+            var winner = 0,winnerVotes = 0;
+            for(var i = 0; i < playerStates.length; i++)
+            {
+                if(playerStates[i].votes >= winnerVotes)
+                {
+                    winner = i;
+                }
+            }
+            playerStates[winner].score++;
+            gameState.story += playerStates[i].line;
+            client.emit('new-story-line',playerStates[i].line);
+            //clearing off the array the next round
+            for(var i = 0; i < playerStates.length; i++)
+            {
+                playerStates[i].line = ""
+                playerStates[i].votes = 0;
+            }
+            flag = 0;
         }
     });
 

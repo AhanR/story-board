@@ -25,6 +25,14 @@
             text-align: center;
         }
 
+        .leaderboard div {
+            width: 100%;
+            height: min-content;
+            margin: 10px;
+            padding: 10px;
+            background-color: antiquewhite;
+        }
+
         .box-container {
             background-color: rgb(79, 163, 236);
             border-radius: 10px;
@@ -155,12 +163,17 @@
                 socket.emit("new-player", userState, (gameState) => {
                     playerStates = gameState.playerStates;
                     addStoryToBox(gameState.story);
+                    updateLeaderBoard();
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
             }
 
         }
 
+        socket.on('new-player-joined',playerList => {
+            playerStates = playerList;
+            updateLeaderBoard();
+        });
     </script>
     <!-- __________________ Starting Popup ______________ -->
     <div class="popup-container" id="submit-user">
@@ -171,7 +184,7 @@
         </div>
     </div>
     <!-- __________________ Main page ___________________ -->
-    <div class="leaderboard">
+    <div class="leaderboard" id="leaderboard" >
         <!-- Leaderboard -->
         <h3>leaderboard</h3>
     </div>
