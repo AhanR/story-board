@@ -130,66 +130,385 @@
             /* position: absolute;
                 bottom: 30%;
                 left: 40%; */
-        }
-    </style>
-</head>
-
-<body>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./socket.js"></script>
-    <script>
-        function check() {
-            if (document.getElementById('enter-name').value.length == 0) { //enter-name refers to popup textbox
-                alert("For fuck's sake enter your username daug!!!");
             }
-            else {
-                userName = document.getElementById('enter-name').value;
-                var userState = { name: userName, id: userId, line: "" };
-                socket.emit("new-player", userState, (gameState) => {
-                    playerStates = gameState.playerStates;
-                    addStoryToBox(gameState.story);
-                    updateLeaderBoard();
-                });
-                window.onclick = document.getElementById('submit-user').style.display = 'none';
+            /*voting popup*/
+            .pop-back{
+                display:none;
+                position: fixed;
+                background-color: rgba(0, 0, 0, 0.8);
+                height: 100%;
+                width: 100%;
+                z-index: 1002;
+
             }
+            .popup-vote{
+                width: 98%;
+                height: 700px;
+                background-color:rgb(79, 163, 236);
+                border-radius: 10px;
+                box-shadow: 1px 4px 10px 3px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+                /*Scroll situation where x-axis is hidden well as we dont need x axis to be scrollable*/
+                /*
+                overflow-x: hidden;
+                overflow-y: scroll;
+                */
+                /* Made y-axis scrollable becoz that's what we need*/
+                position: absolute;
+                left: 1%;
+                top: 3%; 
+            }
+            /*first slot starts*/
+           .popup-vote .pop-back1{
+               background-color: blueviolet;
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               flex-direction: column;
+               justify-content: space-around;
+               
+           }
+           .pop-back1 .text-box1{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+               
+           }
+           .pop-back1 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+               
+           }
+           /*First slot ends*/
 
-        }
+           /*Second slot start*/
+           .popup-vote .pop-back2{
+               background-color: rgb(226, 95, 43);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               flex-direction: column;
+               justify-content: space-around;
+               
+           }
+           .pop-back2 .text-box2{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+               
+           }
+           .pop-back2 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+               
+           }
+           /*Second slot end*/
 
-        socket.on('new-player-joined',playerList => {
-            playerStates = playerList;
-            updateLeaderBoard();
-        });
-    </script>
-    <!-- __________________ Starting Popup ______________ -->
-    <div class="popup-container" id="submit-user">
-        <div class="popup-screen">
-            <h2>Enter Username</h2>
-            <input type="text" placeholder="Username" id="enter-name" required>
-            <button type="submit" onclick="check()">Enter</button>
+            /*Third slot start*/
+            .popup-vote .pop-back3{
+               background-color: rgb(226, 214, 43);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: space-around;
+               flex-direction: column;
+               
+           }
+           .pop-back3 .text-box3{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+               
+           }
+           .pop-back3 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+               
+           }
+           /*Third slot end*/
+           
+           /*Fourth slot start*/
+           .popup-vote .pop-back4{
+               background-color: rgb(108, 197, 25);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               flex-direction: column;
+               justify-content: space-around;
+               
+           }
+           .pop-back4 .text-box4{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+                
+           }
+           .pop-back4 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+              
+           }
+           /*Fourth slot end*/
+
+           /*Fifth slot end*/
+           .popup-vote .pop-back5{
+               background-color: rgb(25, 197, 174);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: space-around;
+               flex-direction: column;
+               
+           }
+           .pop-back5 .text-box5{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+                
+           }
+           .pop-back5 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+              
+           }
+           /*Fifth slot end*/
+
+           /*sixth slot end*/
+           .popup-vote .pop-back6{
+               background-color: rgb(64, 19, 102);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: space-around;
+               flex-direction: column;
+               
+           }
+           .pop-back6 .text-box6{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+                
+           }
+           .pop-back6 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+              
+           }
+           /*Fifth slot end*/
+
+           /*seventh slot end*/
+           .popup-vote .pop-back7{
+               background-color: rgb(221, 52, 255);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: space-around;
+               flex-direction: column;
+               
+           }
+           .pop-back7 .text-box7{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+                
+           }
+           .pop-back7 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+              
+           }
+           /*seventh slot end*/
+
+           /*Eighth slot end*/
+           .popup-vote .pop-back8{
+               background-color: rgb(121, 10, 10);
+               height: 40%;
+               width: 24%;
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: space-around;
+               flex-direction: column;
+               
+           }
+           .pop-back8 .text-box8{
+                background-color: whitesmoke;
+                height: 78%;
+                width: 92%;
+                border-radius: 10px;
+                
+           }
+           .pop-back8 button{
+               height: 30px;
+               width: 64px;
+               border-radius: 10px;
+               border: none;
+              
+           }
+           /*Eighth slot end*/
+        </style>
+    </head>
+    <body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./socket.js"></script>
+        <script>
+            
+            function check(){
+                if (document.getElementById('enter-name').value.length==0){ //enter-name refers to popup textbox
+                    alert("For fuck sake Enter your username daug!!!");
+                }
+                else{
+                    window.onclick=document.getElementById('submit-user').style.display='none';
+                }
+
+            }
+            
+        </script>
+        <!-- __________________ Starting Popup ______________ -->
+        <div class="popup-container" id="submit-user">
+            <div class="popup-screen">
+                    <h2>Enter Username</h2>
+                    <input type="text" placeholder="Username" id="enter-name" required>
+                    <button type="submit" onclick="check()"><b>Enter</b></button>
+            </div>
         </div>
-    </div>
-    <!-- __________________ Main page ___________________ -->
-    <div class="leaderboard" id="leaderboard" >
-        <!-- Leaderboard -->
-        <h3>leaderboard</h3>
-    </div>
+        <!-- __________________ Main page ___________________ -->
+        <div class="leaderboard">
+            <!-- Leaderboard -->
+            <h3>leaderboard</h3>
+            <div class="userList">
+            </div>
+        </div>
 
-    <div class="box-container">
-        <!-- main story board-->
-
-        <div class="voted-storybox" id = "voted-storybox">
-            <!-- Selected/voted sentences to be displayed here 
+        <div class="box-container">
+            <!-- The chat box thingy?? container-->
+            
+            <div class="voted-storybox">
+                <!-- Selected/voted sentences to be displayed here 
                     ____White blank container to displaye voted sentences___
                 -->
+            </div>
+
+            <div class="text-area">
+                <!-- ______________Textarea________________________-->
+                <textarea class="enter-box" style="resize: none;"></textarea>
+                <button type="submit" onclick="document.getElementById('vote-box').style.display='block';"><b>Enter</b></button>
+            </div>
+
         </div>
+        <!-- _____________________POPUP on clicking enter (Voting box)_________________ -->
+        <div class="pop-back" id="vote-box">
+            <div class="popup-vote">
+                <!-- First slot -->
+                <div class="pop-back1">
+                    <div class="text-box1">
 
-        <div class="text-area">
-            <!-- ______________Textarea________________________-->
-            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
-            <button class="input-button" onclick="sendStoryLine()">enter</button>
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+
+                 <!-- Second slot -->
+                 <div class="pop-back2">
+                    <div class="text-box2">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+
+                <!-- Third slot -->
+                <div class="pop-back3">
+                    <div class="text-box3">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+                
+                <!-- Fourth slot -->
+                <div class="pop-back4">
+                    <div class="text-box4">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+
+                 <!-- Fifth slot -->
+                 <div class="pop-back5">
+                    <div class="text-box5">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+
+                 <!-- Sixth slot -->
+                 <div class="pop-back6">
+                    <div class="text-box6">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+
+                <!-- Seventh slot -->
+                <div class="pop-back7">
+                    <div class="text-box7">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+
+                <!-- Eighth slot -->
+                <div class="pop-back8">
+                    <div class="text-box8">
+
+                    </div>
+                    <button><b>Vote</b></button>
+                </div>
+                <!--End-->
+            </div>
         </div>
-
-    </div>
-</body>
-
+    </body>
 </html>
