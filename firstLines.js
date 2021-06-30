@@ -1,5 +1,5 @@
-{
-    "lines" : [
+module.exports = function (n) {
+    const lines = [
         "Only the very oldest people remembered a time when humans could see in colour ",
         "She felt for the lock in the dark ",
         "It was the trip of a lifetime, yet ",
@@ -16,7 +16,6 @@
         "As the prison gate closed behind him, he saw someone waiting for him ",
         "He was excited to find 150 new emails in his inbox ",
         "Half the names on the list had already been crossed off. ",
-        "He hadn't seen the old man since ",
         "She took a deep breath and said to her boss - ",
         "There had been many theories about how she had been murdered ",
         "The Ferrari stopped and the tinted window opened to reveal ",
@@ -24,7 +23,7 @@
         "He looked at his phone, turned pale, then quickly left the room. She watched him, smiling.",
         "As the sun set on the beaches of goa,",
         "One hand in the sand, ",
-        "After 5 years of Quarantine",
+        "After 5 years of Quarantine ",
         "As we stood in the moonlight ",
         "This was the first time that he had ",
         "Back in 1992, ",
@@ -32,6 +31,6 @@
         "Can one ever know when and how they die? ",
         "Did you know that ",
         "As the plane started to ascend into madeness "
-
-    ]
+    ];
+    return lines[n];
 }

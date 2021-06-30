@@ -14,8 +14,10 @@ const socket = require('socket.io');
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
+const firstLines = require('./firstLines');
+const numberOfFirstLines = 30;
 
-var playerStates = [] , flag = 0 , gameState = {story : "" , playerStates : playerStates};
+var playerStates = [] , flag = 0 , gameState = {story : "A long time ago " , playerStates : playerStates} , random = 0;
 io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
@@ -45,6 +47,10 @@ io.on("connection", (client) => {
                 flag++;
             }
         }
+        if(flag == playerStates.length)
+        {
+            console.log("voting begins");
+        }
     });
 
     client.on("disconnect", () => {
@@ -54,16 +60,17 @@ io.on("connection", (client) => {
                 console.log(client.id + " was disconnected")
             }
         }
+        if(playerStates.length == 0)
+        {
+            resetGameState();
+        }
     });
 });
 
 function resetGameState()
 {
-    $.getJSON("firstLines.json", function (data) {
-        console.log(data);
-        // data.lines[Math.random()];
-        // reset game state and call it when number of users reaches to 0
-    });
+    random = (random + 1) % numberOfFirstLines;
+    gameState.story = firstLines(random);
 }
 
 //loading static libraries
