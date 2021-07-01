@@ -1,11 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const server = app.listen(3000, {
-    cors: {
-        origin: ["https://localhost:8080"]
-    }
-});
+const server = app.listen(process.env.PORT || 3000);
 
 const io = require('socket.io')(server);
 const socket = require('socket.io');
@@ -20,7 +16,6 @@ io.on("connection", (client) => {
     playerStates.push({ name: "untitled", id: client.id, line: "" , score : 0, votes : 0})
 
     client.on("new-player", (player, cb) => {
-
         for (var i = 0; i < playerStates.length; i++) {
             if (player.id == playerStates[i].id) {
                 playerStates[i].name = player.name;

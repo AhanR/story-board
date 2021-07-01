@@ -5,7 +5,7 @@
     <title>Story-Board</title>
     <style>
         *{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-family:Georgia, 'Times New Roman', Times, serif;
         }
 
         body {
@@ -28,7 +28,10 @@
             text-align: center;
         }
 
-        .leaderboard div {
+        .player-list {
+            overflow :hidden;
+        }
+        .player-list div {
             background-color: antiquewhite;
             height: max-content;
             width: 80%;
@@ -40,7 +43,7 @@
             justify-content: space-between;
         }
 
-        .leaderboard p {
+        .player-list p {
             font-weight: 200;
             margin: 0%;
             padding: 0%;
@@ -183,11 +186,6 @@
             margin: 5px;
         }
 
-        .popup-vote > textarea {
-            resize: none;
-            outline: none;
-        }
-
         .text-box {
             background-color: antiquewhite;
             width: 90%;
@@ -209,12 +207,12 @@
 
         .popup-vote .pop-back1 {
             /* border-color: blueviolet; */
-            background-color: blueviolet;
+            background-color: rgb(173, 117, 224);
         }
 
         .popup-vote .pop-back2 {
             /* border-color: rgb(226, 95, 43); */
-            background-color: rgb(226, 95, 43);
+            background-color: rgb(216, 131, 97);
         }
 
         .popup-vote .pop-back3 {
@@ -256,6 +254,21 @@
             top: 0%;
             left: 0%;
         }
+
+        .prevent-play {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            background-color: rgb(16, 67, 161);
+            color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: larger;
+            font-weight: 900;
+            width: 100vw;
+            height: 100vh;
+        }
     </style>
 </head>
 
@@ -271,8 +284,16 @@
                 userName = document.getElementById('enter-name').value;
                 var userState = { name: userName, id: userId, line: "" };
                 socket.emit("new-player", userState, (gameState) => {
-                    playerStates = gameState.playerStates;
-                    addStoryToBox(gameState.story);
+                    if(gameState.playerStates.length > 8)
+                    {
+                        alert("fuck off, we're too busy. No more players allowed");
+                        document.getElementById('prevent-play').style.display='block';
+                    }
+                    else
+                    {
+                        playerStates = gameState.playerStates;
+                        addStoryToBox(gameState.story);
+                    }
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
             }
@@ -288,8 +309,8 @@
     </div>
     <!-- __________________ Main page ___________________ -->
     <div class="leaderboard" id="leaderboard" >
-        <!-- Leaderboard -->
         <h3>leaderboard</h3>
+        <div class="player-list" id="player-list"></div>
     </div>
 
     <div class="box-container">
@@ -314,7 +335,11 @@
         </div>
     </div>
 
+    <!-- prevent player from interacting with the game -->
     <div class="prevent-player" id="prevent-player" onclick="alert(`voting in progress`)" onkeyup="alert(`voting in progress`)">Voting in progress...</div>
+
+    <!-- prevent player form playing -->
+    <div id="prevent-play" class="prevent-play"> Get lost </div>
 </body>
 
 </html>

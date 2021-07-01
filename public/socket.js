@@ -1,4 +1,10 @@
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect('http://localhost');
+// const socket = io("http://localhost", {
+//   withCredentials: true,
+//   extraHeaders: {
+//     "my-custom-header": "Allow this"
+//   }
+// });
 var userId, userName = "", playerStates = [] , story = "";
 var counter = 0;
 
@@ -6,6 +12,7 @@ window.onload = ()=>{
     document.getElementById('vote-box').style.display='none';
     document.getElementById('prevent-player').style.display='none'
     document.getElementById('popup-vote').innerHTML = "";
+    document.getElementById('prevent-play').style.display='none';
 }
 
 socket.on("user-id", id =>{
@@ -13,9 +20,6 @@ socket.on("user-id", id =>{
 });
 
 socket.on('new-story-line',line => {
-    // if ((story.slice(-1) == " " || story.slice(-1) == "\n") && (line.slice(0,1) != "." || line.slice(0,1) != "," || line.slice(0,1) != "!")) {
-    //     line = " ." + line;
-    // }
     addStoryToBox(line);
     document.getElementById('vote-box').style.display='none';
     document.getElementById('prevent-player').style.display='none'
@@ -48,7 +52,7 @@ function addStoryToBox(storyLine){
 
 function updateLeaderBoard()
 {
-    document.getElementById("leaderboard").innerHTML = "<h3>leaderboard</h3>";
+    document.getElementById("player-list").innerHTML = "";
     var leaderboad = playerStates;
     for(var i = 0; i < leaderboad.length; i++)
     {
@@ -65,7 +69,7 @@ function updateLeaderBoard()
 
     for(var i = 0; i < leaderboad.length; i++)
     {
-        document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
+        document.getElementById("player-list").innerHTML += `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
     }
 }
 
@@ -103,7 +107,7 @@ function castVote(index)
         alert("voting failed, start contemplting life");
     });
     console.log("casting vote");
-    document.getElementById('prevent-player').style.display='block'
+    document.getElementById('prevent-player').style.display='block';
 }
 
 // document.getElementById("controllingUser").textContent = "rotating turns";
