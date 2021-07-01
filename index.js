@@ -17,7 +17,6 @@ var playerStates = [] , flag = 0 , gameState = {story : "A long time ago " , pla
 io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
-    console.log(client.id);
     playerStates.push({ name: "untitled", id: client.id, line: "" , score : 0, votes : 0})
 
     client.on("new-player", (player, cb) => {
@@ -25,12 +24,10 @@ io.on("connection", (client) => {
         for (var i = 0; i < playerStates.length; i++) {
             if (player.id == playerStates[i].id) {
                 playerStates[i].name = player.name;
-                console.log(playerStates[i].name + " connected");
                 cb(gameState);
                 updateLeaderBoard();
             }
         }
-        console.log(playerStates);
     });
 
     client.on("send-story-line", storyLine => {
@@ -40,7 +37,6 @@ io.on("connection", (client) => {
             if (storyLine.id == playerStates[i].id)
             {
                 playerStates[i].line = storyLine.line;
-                console.log(playerStates[i].name + " wrote " + playerStates[i].line);
                 updateLeaderBoard();
             }
         }
@@ -54,6 +50,7 @@ io.on("connection", (client) => {
             {
                 console.log("vote cast " + playerStates[i].name);
                 playerStates[i].votes++;
+                console.log(playerStates);
                 notAPlayer = 1;
                 flag++;
             }
@@ -68,12 +65,12 @@ io.on("connection", (client) => {
                 if(playerStates[i].votes >= winnerVotes)
                 {
                     winner = i;
-                    
+                    winnerVotes = playerStates[i].votes;
                 }
             }
             playerStates[winner].score++;
-            gameState.story += playerStates[winner].line;
             io.emit('new-story-line',playerStates[winner].line);
+            gameState.story += playerStates[winner].line;
             updateLeaderBoard();
             console.log(playerStates[winner].name);
             //clearing off the array the next round
@@ -90,7 +87,6 @@ io.on("connection", (client) => {
         for (var i = 0; i < playerStates.length; i++) {
             if (client.id == playerStates[i].id) {
                 playerStates.splice(i, 1);
-                console.log(client.id + " was disconnected")
                 updateLeaderBoard();
             }
         }

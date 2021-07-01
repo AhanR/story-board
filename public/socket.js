@@ -13,6 +13,9 @@ socket.on("user-id", id =>{
 });
 
 socket.on('new-story-line',line => {
+    // if ((story.slice(-1) == " " || story.slice(-1) == "\n") && (line.slice(0,1) != "." || line.slice(0,1) != "," || line.slice(0,1) != "!")) {
+    //     line = " ." + line;
+    // }
     addStoryToBox(line);
     document.getElementById('vote-box').style.display='none';
     document.getElementById('prevent-player').style.display='none'
@@ -27,9 +30,14 @@ socket.on('update-player-state',playerStatesNew => {
 
 function sendStoryLine() {
     if (document.getElementById('enter-box').value != "") {
-        socket.emit("send-story-line", {line : document.getElementById('enter-box').value , id : userId});
+        var line = document.getElementById('enter-box').value;
+        if(line.slice(-1) != " " || line.slice(-1) != "\n" || line.slice(-1) != ",")
+        {
+            line += " ";
+        }
+        socket.emit("send-story-line", { line: line, id: userId });
         document.getElementById('enter-box').value = "";
-        document.getElementById('vote-box').style.display='block';
+        document.getElementById('vote-box').style.display = 'block';
     }
 }
 
@@ -41,11 +49,24 @@ function addStoryToBox(storyLine){
 function updateLeaderBoard()
 {
     document.getElementById("leaderboard").innerHTML = "<h3>leaderboard</h3>";
-    for(var i = 0; i < playerStates.length; i++)
+    var leaderboad = playerStates;
+    for(var i = 0; i < leaderboad.length; i++)
+    {
+        for(var j = 0; j < i; j++)
+        {
+            if(leaderboad[i].score > leaderboad [j].score)
+            {
+                var temp = leaderboad[i];
+                leaderboad[i] = leaderboad[j];
+                leaderboad[j] = temp;
+            }
+        }
+    }
+
+    for(var i = 0; i < leaderboad.length; i++)
     {
         document.getElementById("leaderboard").innerHTML += `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
     }
-    console.log("ldrbrd updated " + counter++);
 }
 
 function updateVoteBox()
