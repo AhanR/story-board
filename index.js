@@ -1,15 +1,17 @@
 const express = require('express');
 const path = require('path');
-const app = express();
-const server = app.listen(process.env.PORT || 3000);
-
-const io = require('socket.io')(server);
-const socket = require('socket.io');
+const app = require("express")();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["*","http://localhost:5000"]
+  },
+});
 
 const firstLines = require('./firstLines');
 const numberOfFirstLines = 30;
-
 var playerStates = [] , flag = 0 , gameState = {story : "A long time ago " , playerStates : playerStates} , random = 0;
+
 io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
@@ -101,6 +103,8 @@ function resetGameState()
     random = (random + 1) % numberOfFirstLines;
     gameState.story = firstLines(random);
 }
+
+server.listen(3000)
 
 //loading static libraries
 app.use(express.static(path.join(__dirname, 'public')))

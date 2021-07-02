@@ -1,5 +1,5 @@
-var socket = io.connect('http://localhost:3000');
-// const socket = io("http://localhost", {
+const socket = io.connect('http://localhost:3000');
+// const socket = io("http://localhost:3000", {
 //   withCredentials: true,
 //   extraHeaders: {
 //     "my-custom-header": "Allow this"
