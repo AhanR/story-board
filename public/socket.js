@@ -1,4 +1,4 @@
-const socket = io.connect('http://localhost:3000');
+const socket = io.connect('https://story-board-game.herokuapp.com/');
 // const socket = io("http://localhost:3000", {
 //   withCredentials: true,
 //   extraHeaders: {
