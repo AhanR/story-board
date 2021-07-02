@@ -104,7 +104,7 @@ function resetGameState()
     gameState.story = firstLines(random);
 }
 
-server.listen(3000)
+server.listen(process.env.PORT || 3000)
 
 //loading static libraries
 app.use(express.static(path.join(__dirname, 'public')))

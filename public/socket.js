@@ -1,10 +1,5 @@
-const socket = io.connect('https://story-board-game.herokuapp.com/');
-// const socket = io("http://localhost:3000", {
-//   withCredentials: true,
-//   extraHeaders: {
-//     "my-custom-header": "Allow this"
-//   }
-// });
+// const socket = io.connect('https://story-board-game.herokuapp.com/');
+const socket = io("http://localhost:3000");
 var userId, userName = "", playerStates = [] , story = "";
 var counter = 0;
 
