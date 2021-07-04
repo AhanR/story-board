@@ -5,22 +5,41 @@
     <title>Story-Board</title>
     <style>
         *{
-            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-family:Arial, Helvetica, sans-serif;
         }
 
         body {
-            background-color: rgb(0, 74, 134);
+            background-image: url(Story-board.jpg);
+            background-repeat: no-repeat;
+            background-size: 1650px 850px;
             margin: 0%;
-        }
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-content: center;
+            flex-wrap: wrap;
 
-        .leaderboard {
-            background-color: rgb(79, 163, 236);
+        }
+         body .game-title{
+            background-color:none;
+            width: 96%;
+            height: 20%;
+        }
+        .game-title .title-box{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            color: whitesmoke;
+           
+        }
+        body .leaderboard {
+            background-color: rgba(16, 67, 161,0.5);
+            box-shadow: 0px 5px 15px;
             border-radius: 10px;
-            position: absolute;
-            height: 86vh;
+           
+            height: 83vh;
             width: 24vw;
-            right: 2%;
-            top: 4%;
+           
+           
         }
 
         .leaderboard h3 {
@@ -49,25 +68,34 @@
             padding: 0%;
         }
 
-        .box-container {
-            background-color: rgb(79, 163, 236);
+        body .box-container {
+            background-color: rgba(16, 67, 161,0.5);
             border-radius: 10px;
             width: 70vw;
-            height: 86vh;
-            position: absolute;
-            left: 2%;
-            top: 4%;
+            height: 83vh;
+            box-shadow: 0px 5px 15px;
+            
+            
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             align-items: center;
+
         }
+        
 
         .box-container>.voted-storybox {
             background-color: antiquewhite;
             border-radius: 10px;
             width: 94%;
-            height: 70%;
+            height: 45%;
+            padding: 10px;
+        }
+        .box-container>.Pactivity-box{
+            background-color: antiquewhite;
+            border-radius: 10px;
+            width: 94%;
+            height: 25%;
             padding: 10px;
         }
 
@@ -96,22 +124,54 @@
 
         .popup-container {
             position: fixed;
+            background-image: url(Story-board.jpg);
+            background-repeat: no-repeat;
+            background-size: 1650px 850px;
             height: 100vh;
             width: 100vw;
-            background-color: rgba(255, 255, 255, 0.6);
+            
             z-index: 1001;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        .glass-container{
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+    
+            position: relative;
+            width: 56%;
+            height: 40%;
+            padding: 30px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0,0, 0.5);
+            overflow: hidden;
+            color: #000;
 
-        .popup-screen {
+            animation:zoom;
+            animation-duration: 0.8s;
+
+        }
+        @keyframes zoom{
+            from{transform: scale(0.3);}
+            to{transform: scale(1);}
+        }
+        .glass-container .rule-box{
+            background-color: aliceblue;
+            box-shadow: 0px 5px 15px;
+            text-align: center;
+            border-radius: 15px;
+            height: 300px;
+            width: 380px;
+        }
+        .glass-container .popup-screen {
             /*maintain 3:2 width:height*/
             width: 390px;
             height: 260px;
             background-color: rgb(16, 67, 161);
             border-radius: 10px;
-            box-shadow: 1px 4px 10px 3px;
+            box-shadow: 0px 5px 15px;
             display: flex;
             justify-content: space-around;
             flex-direction: column;
@@ -148,15 +208,15 @@
         .pop-back {
             display: none;
             position: fixed;
-            height: 100%;
-            width: 100%;
+            height: 100vh;
+            width: 100vw;
             z-index: 1002;
 
         }
 
         .popup-vote {
             width: 100%;
-            height: 700px;
+            height: 100%;
             background-color: rgb(16, 67, 161);
             display: flex;
             justify-content: space-around;
@@ -166,9 +226,7 @@
             overflow-x: hidden;
             overflow-y: scroll;
             /* Made y-axis scrollable becoz that's what we need*/
-            position: absolute;
-            left: 0%;
-            top: 0%;
+           
         }
 
         .popup-vote>div {
@@ -187,7 +245,7 @@
         }
 
         .text-box {
-            background-color: antiquewhite;
+            /* background-color: antiquewhite; */
             width: 90%;
             height: max-content;
             max-height: 100%;
@@ -199,6 +257,7 @@
         }
 
         .popup-vote button {
+            padding: 10px;
             border-radius: 10px;
             border: none;
             width: 90%;
@@ -296,20 +355,37 @@
                     }
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
+            
             }
         }
     </script>
     <!-- __________________ Starting Popup ______________ -->
     <div class="popup-container" id="submit-user">
-        <div class="popup-screen">
-            <h2>Enter Username</h2>
-            <input type="text" placeholder="Username" id="enter-name" required>
-            <button type="submit" onclick="check()">Enter</button>
+
+        <div class="glass-container">
+            <div class="popup-screen">
+                <h2>Enter Username</h2>
+                <input type="text" placeholder="Username" id="enter-name" required>
+                <button type="submit" id="sub" onclick="check()">Enter</button>
+            </div>
+
+            <div class="rule-box">
+                <h3><b>How to Play?</b></h3>
+                <hr>
+            </div>
         </div>
     </div>
     <!-- __________________ Main page ___________________ -->
+    <div class="game-title"> 
+        <!-- Game title-->
+        <div class="title-box">
+            <h1>Story-Board</h1>
+        </div>
+    </div> 
+
     <div class="leaderboard" id="leaderboard" >
         <h3>leaderboard</h3>
+        <hr> 
         <div class="player-list" id="player-list"></div>
     </div>
 
@@ -320,10 +396,14 @@
             <!-- Selected/voted sentences to be displayed here -->
         </div>
 
+        <div class="Pactivity-box">
+            <!-- Players activity to be displayed here-->
+        </div>
+
         <div class="text-area">
             <!-- ___________________Textarea________________________-->
             <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
-            <button class="input-button" onclick="sendStoryLine()" >enter</button>
+            <button class="input-button" onclick="sendStoryLine()" >Enter</button>
         </div>
 
     </div>
