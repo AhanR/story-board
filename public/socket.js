@@ -52,6 +52,7 @@ function updateLeaderBoard()
 {
     document.getElementById("player-list").innerHTML = "";
     var leaderboad = playerStates;
+    //sorting for leaderboard
     for (var i = 0; i < leaderboad.length; i++) {
         for (var j = 0; j < i; j++) {
             if (leaderboad[i].score > leaderboad[j].score) {
@@ -62,22 +63,24 @@ function updateLeaderBoard()
         }
     }
 
+    //adding elements to the leaderboard
     for (var i = 0; i < leaderboad.length; i++) {
         document.getElementById("player-list").innerHTML +=
             `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p>
-            <span>Typing...</span></div>`;
+            <hr>
+            <span class = "${playerStates[i].id}-span">waiting....</span></div>`;
     }
     
-    // if(playerStates.length < 3)
-    // {
-    //     document.getElementById('enter-box').style.placeholder = "hold up, waiting for some more idiots to join";
-    //     document.getElementById('enter-box').disabled = true;
-    // }
-    // else
-    // {
-    //     document.getElementById('enter-box').style.placeholder = "hold up, waiting for some more idiots to join";
-    //     document.getElementById('enter-box').disabled = true;
-    // }
+    if(leaderboad.length < 3)
+    {
+        document.getElementById('enter-box').placeholder = "hold up, waiting for some more idiots to join";
+        document.getElementById('enter-box').disabled = true;
+    }
+    else
+    {
+        document.getElementById('enter-box').placeholder = "write a god damned story";
+        document.getElementById('enter-box').disabled = false;
+    }
 }
 
 function updateVoteBox()
@@ -114,4 +117,10 @@ function castVote(index)
         alert("voting failed, start contemplting life");
     });
     document.getElementById('prevent-player').style.display='block';
+}
+
+function updatePactivityBox()
+{
+    const pactivityBox = document.getElementById('pactivity-box');
+
 }
