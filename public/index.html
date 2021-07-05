@@ -11,8 +11,7 @@
     <script src="./socket.js"></script>
     <script>
         function check() {
-            if (document.getElementById('enter-name').value.length == 0) { 
-                //enter-name refers to popup textbox
+            if (document.getElementById('enter-name').value.length == 0) { //enter-name refers to popup textbox
                 alert("For fuck's sake enter your username daug!!!");
             }
             else {
@@ -23,7 +22,6 @@
                     {
                         alert("fuck off, we're too busy. No more players allowed");
                         document.getElementById('prevent-play').style.display='block';
-                        socket.disconnect();
                     }
                     else
                     {
@@ -49,7 +47,16 @@
             <div class="rule-box">
                 <h3><b>How to Play?</b></h3>
                 <hr>
+                <ul>
+                    <li>Players will be given a piece of story.</li><br>
+                    <li>Enter your spice/part to the story in the "Text box".</li><br>
+                    <li>Once entered a session will be conducted among the players to<br>select/vote the wildest (is what I'd like to say) sentence to progress the story.</li><br>
+                    <li>The highest voted sentence is displayed in the story and progresses the story with the winning player scoring a point.</li>
+                </ul>
             </div>
+            <!-- <div class="creators">
+
+            </div> -->
         </div>
     </div>
     <!-- __________________ Main page ___________________ -->
@@ -79,8 +86,8 @@
 
         <div class="text-area">
             <!-- ___________________Textarea________________________-->
-            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;" placeholder="write story pls"></textarea>
-            <button class="input-button" onclick="sendStoryLine()" >Enter</button>
+            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
+            <button class="input-button" onclick="sendStoryLine()">Enter</button>
         </div>
 
     </div>
@@ -93,7 +100,10 @@
     </div>
 
     <!-- prevent player from interacting with the game -->
-    <div class="prevent-player" id="prevent-player" onclick="alert(`voting in progress`)" onkeyup="alert(`voting in progress`)">Voting in progress...</div>
+    <div class="prevent-player" id="prevent-player" onclick="alert(`voting in progress`)" onkeyup="alert(`voting in progress`)">
+       <h2>Voting in progress....</h2>
+    
+    </div>
 
     <!-- prevent player form playing -->
     <div id="prevent-play" class="prevent-play"> Get lost </div>
