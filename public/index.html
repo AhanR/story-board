@@ -22,6 +22,7 @@
                     {
                         alert("fuck off, we're too busy. No more players allowed");
                         document.getElementById('prevent-play').style.display='block';
+                        socket.disconnect();
                     }
                     else
                     {
@@ -86,7 +87,7 @@
 
         <div class="text-area">
             <!-- ___________________Textarea________________________-->
-            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
+            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;" placeholder="Write story please"></textarea>
             <button class="input-button" onclick="sendStoryLine()">Enter</button>
         </div>
 
