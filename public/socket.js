@@ -1,6 +1,6 @@
-const socket = io.connect('https://story-board-game.herokuapp.com/');
-// const socket = io("http://localhost:3000");
-var userId, userName = "", playerStates = [] , story = "";
+// const socket = io.connect('https://story-board-game.herokuapp.com/');
+const socket = io("http://localhost:3000");
+var userId, userName = "", playerStates = [] , story = "", isPlayerVoting = false;
 var counter = 0;
 
 window.onload = ()=>{
@@ -8,6 +8,7 @@ window.onload = ()=>{
     document.getElementById('prevent-player').style.display='none'
     document.getElementById('popup-vote').innerHTML = "";
     document.getElementById('prevent-play').style.display='none';
+    isPlayerVoting =false;
 }
 
 socket.on("user-id", id =>{
@@ -19,6 +20,7 @@ socket.on('new-story-line',line => {
     document.getElementById('vote-box').style.display='none';
     document.getElementById('prevent-player').style.display='none'
     document.getElementById('popup-vote').innerHTML = "";
+    isPlayerVoting =false;
 });
 
 socket.on('update-player-state',playerStatesNew => {
@@ -37,6 +39,7 @@ function sendStoryLine() {
         socket.emit("send-story-line", { line: line, id: userId });
         document.getElementById('enter-box').value = "";
         document.getElementById('vote-box').style.display = 'block';
+        isPlayerVoting =true;
     }
 }
 
@@ -49,12 +52,9 @@ function updateLeaderBoard()
 {
     document.getElementById("player-list").innerHTML = "";
     var leaderboad = playerStates;
-    for(var i = 0; i < leaderboad.length; i++)
-    {
-        for(var j = 0; j < i; j++)
-        {
-            if(leaderboad[i].score > leaderboad [j].score)
-            {
+    for (var i = 0; i < leaderboad.length; i++) {
+        for (var j = 0; j < i; j++) {
+            if (leaderboad[i].score > leaderboad[j].score) {
                 var temp = leaderboad[i];
                 leaderboad[i] = leaderboad[j];
                 leaderboad[j] = temp;
@@ -62,10 +62,22 @@ function updateLeaderBoard()
         }
     }
 
-    for(var i = 0; i < leaderboad.length; i++)
-    {
-        document.getElementById("player-list").innerHTML += `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
+    for (var i = 0; i < leaderboad.length; i++) {
+        document.getElementById("player-list").innerHTML +=
+            `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p>
+            <span>Typing...</span></div>`;
     }
+    
+    // if(playerStates.length < 3)
+    // {
+    //     document.getElementById('enter-box').style.placeholder = "hold up, waiting for some more idiots to join";
+    //     document.getElementById('enter-box').disabled = true;
+    // }
+    // else
+    // {
+    //     document.getElementById('enter-box').style.placeholder = "hold up, waiting for some more idiots to join";
+    //     document.getElementById('enter-box').disabled = true;
+    // }
 }
 
 function updateVoteBox()
@@ -96,13 +108,10 @@ function updateVoteBox()
 
 function castVote(index)
 {
-    var vote = playerStates[index].id;
+    var vote = {candidate : playerStates[index].id, player : userId};
     socket.emit('cast-vote',vote, (voteCast) => {
         if(!voteCast)
         alert("voting failed, start contemplting life");
     });
-    console.log("casting vote");
     document.getElementById('prevent-player').style.display='block';
 }
-
-// document.getElementById("controllingUser").textContent = "rotating turns";
