@@ -5,7 +5,7 @@
 body {
     background-image: url(in-game-tile.png);
     background-size: 300px;
-    /* background-color: rgb(31, 83, 151); */
+    background-color: rgb(31, 83, 151);
     margin: 0%;
     display: flex;
     flex-direction: row;
@@ -26,19 +26,22 @@ body {
     color: whitesmoke;
    
 }
-body .leaderboard {
+.leaderboard {
     background-color: rgba(16, 67, 161,0.5);
     border-radius: 10px;
     box-shadow: 0px 5px 15px;
     height: 83vh;
     width: 24vw;
-   
-   
+    padding: 5px;
 }
 
 .leaderboard h3 {
     color: antiquewhite;
     text-align: center;
+}
+
+.leaderboard hr {
+    width: 80%;
 }
 
 .player-list {
@@ -62,12 +65,13 @@ body .leaderboard {
     padding: 0%;
 }
 
-body .box-container {
+.box-container {
     background-color: rgba(16, 67, 161,0.5);
     border-radius: 10px;
     width: 70vw;
     height: 83vh;
-    box-shadow: 0px 5px 15px;   
+    box-shadow: 0px 5px 15px;
+    padding: 5px; 
 
     display: flex;
     justify-content: center;
@@ -85,9 +89,11 @@ body .box-container {
     padding: 10px;
 }
 .box-container>.Pactivity-box{
-    background-color: antiquewhite;
+    backdrop-filter: blur(2px);
     border-radius: 10px;
+    border: antiquewhite solid 3px;
     width: 94%;
+    width: -6px;
     height: 25%;
     padding: 10px;
 }
@@ -154,21 +160,23 @@ body .box-container {
     justify-content: space-around;
     align-content:center;
     flex-wrap: wrap;
+    flex-direction: column;
 
     position: relative;
-    width: 56%;
+    width: 850px;
     height: 55%;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
    
-    background-color: rgba(255, 255, 255, .15);
+    background-color: rgba(11, 42, 100, 0.15);
+    /* background-color: rgba(255, 255, 255, .15); */
   
     backdrop-filter: blur(5px);
 
 
     animation:zoom;
-    animation-duration: 0.8s;
+    animation-duration: 0.2s;
 
 }
 @keyframes zoom{
@@ -176,13 +184,17 @@ body .box-container {
     to{transform: scale(1);}
 }
 .glass-container .rule-box{
-    background-color: aliceblue;
-    box-shadow: 0px 5px 15px;
-    text-align: center;
+    /* background-color: aliceblue; */
+    background: none;
+    /* box-shadow: 0px 5px 15px; */
+    text-align: start;
     font-size: medium;
     border-radius: 15px;
     height: 380px;
     width: 400px;
+    color: antiquewhite;
+    margin-right: 10px;
+    order: 1;
 }
 /* .glass-container .creators{
     background-color: rgb(16, 56, 129);
@@ -195,13 +207,16 @@ body .box-container {
     /*maintain 3:2 width:height*/
     width: 390px;
     height: 260px;
-    background-color: rgb(16, 67, 161);
+    /* background-color: rgb(16, 67, 161); */
+    background: none;
     border-radius: 10px;
-    box-shadow: 0px 5px 15px;
+    /* box-shadow: 0px 5px 15px; */
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
+    order: 2;
+    margin-left: 10px;
 }
 
 .popup-screen h2 {
@@ -215,23 +230,29 @@ body .box-container {
 .popup-screen input {
     font-size: larger;
     width: 65%;
-    border-radius: 10px;
-    padding: 5px;
+    /* border-radius: 10px; */
+    padding: 10px;
     border: none;
-    text-align: center
+    text-align: end;
+    background: none;
+    outline: none;
+    border-bottom: antiquewhite solid 2px;
+    color: antiquewhite;
 }
 
 .popup-screen button {
     background-color: antiquewhite;
     font-size: large;
     border-radius: 10px;
-    padding: 4px 10px;
+    padding: 10px;
     width: 20%;
     border: none;
+    transition-duration: 0.3s;
 }
 .popup-screen button:hover{
-    background-color: rgb(185, 181, 181);
+    background-color: rgb(79, 163, 236);
     transform: scale(1.1);
+    color: antiquewhite;
 }
 
 /* vote-box */
@@ -248,6 +269,8 @@ body .box-container {
     width: 100%;
     height: 100%;
     background-color: rgb(16, 67, 161);
+    background-image: url(in-game-tile.png);
+    background-size: 300px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -356,11 +379,9 @@ body .box-container {
     animation-duration: 4s ;
 }
 @keyframes fade{
-    0%   {background-color:rgb(0, 0, 0);}
-  25%  {background-color: rgba(114, 114, 114, 0.829);}
-  50%  {background-color: rgb(75, 75, 75);}
-  75%  {background-color: rgba(114,114,114,0.829);}
-  100% {background-color: rgb(0, 0, 0);}
+    0%   {background-color:rgba(16, 56, 131, 0.6);}
+  50%  {background-color: rgba(29, 180, 160, 0.6);}
+  100% {background-color: rgba(16, 56, 131, 0.6);}
 }
 .prevent-play {
     position: absolute;
@@ -383,7 +404,7 @@ body .box-container {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    /* box-shadow: inset 0 0 5px grey;  */
     border-radius: 10px;
 }
 
