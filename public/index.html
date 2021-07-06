@@ -4,6 +4,7 @@
 <head>
     <title>Story-Board</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="story-board-icon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -31,7 +32,6 @@
                     }
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
-            
             }
         }
     </script>
@@ -44,7 +44,6 @@
                 <input type="text" placeholder="Username" id="enter-name" required autocomplete="off">
                 <button type="submit" id="sub" onclick="check()">Enter</button>
             </div>
-
             <div class="rule-box">
                 <h3><b>How to Play?</b></h3>
                 <hr>
@@ -87,7 +86,7 @@
 
         <div class="text-area">
             <!-- ___________________Textarea________________________-->
-            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;"></textarea>
+            <textarea type = "text" class="enter-box" id = "enter-box" style="resize: none;" onkeyup="checkEnterStory()"></textarea>
             <button class="input-button" onclick="sendStoryLine()">Enter</button>
         </div>
 

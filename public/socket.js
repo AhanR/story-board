@@ -1,5 +1,5 @@
-// const socket = io.connect('https://story-board-game.herokuapp.com/');
-const socket = io("http://localhost:3000");
+const socket = io.connect('https://story-board-game.herokuapp.com/');
+// const socket = io("http://localhost:3000");
 var userId, userName = "", playerStates = [] , story = "", isPlayerVoting = false;
 var counter = 0;
 var usersVoting = [], hasUserBeenFound = false;
@@ -145,3 +145,20 @@ function updatePactivityBox(userData)
     `<div class = "author-name">${userData.name}'s line :</div>
     <div class="story-line-written" style="background-color: ${userData.colour};">${userData.line}</div>`;
 }
+
+function checkEnterStory() {
+    var last = document.getElementById('enter-box').value.slice(-1);
+    if(last == "\n")
+    {
+        sendStoryLine();
+    }
+}
+
+// function checkEnterUserName() {
+//     var last = document.getElementById('enter-name').value.slice(-1);
+//     console.log(last);
+//     if(last == "\n")
+//     {
+//         check();
+//     }
+// }
