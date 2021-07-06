@@ -259,7 +259,10 @@ body {
     border-bottom: antiquewhite solid 2px;
     color: antiquewhite;
 }
-
+.popup-screen input::placeholder{
+    color: white;
+    opacity: 65%;       /*__Placeholder visible nahi tha so white karke opacaity adjust kiya*/
+}
 .popup-screen button {
     background-color: antiquewhite;
     font-size: large;
