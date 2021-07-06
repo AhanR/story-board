@@ -2,6 +2,7 @@
 const socket = io("http://localhost:3000");
 var userId, userName = "", playerStates = [] , story = "", isPlayerVoting = false;
 var counter = 0;
+var usersVoting = [], hasUserBeenFound = false;
 
 window.onload = ()=>{
     document.getElementById('vote-box').style.display='none';
@@ -21,6 +22,8 @@ socket.on('new-story-line',line => {
     document.getElementById('prevent-player').style.display='none'
     document.getElementById('popup-vote').innerHTML = "";
     isPlayerVoting =false;
+    hasUserBeenFound = false;
+    usersVoting = [];
 });
 
 socket.on('update-player-state',playerStatesNew => {
@@ -63,14 +66,34 @@ function updateLeaderBoard()
         }
     }
 
+    hasUserBeenFound = false;
     //adding elements to the leaderboard
     for (var i = 0; i < leaderboad.length; i++) {
         document.getElementById("player-list").innerHTML +=
-            `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p>
-            <hr>
-            <span class = "${playerStates[i].id}-span">waiting....</span></div>`;
+            `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
+
+        
+        //findind new text content
+        var flag = 0;
+        if (!hasUserBeenFound) {
+            console.log(usersVoting);
+            for (var j = 0; j < usersVoting.length; j++) {
+                if (usersVoting[j] == playerStates[i].id) {
+                    flag++
+                    console.log("we here");
+                    break;
+                }
+            }
+            if (playerStates[i].line != "" && flag == 0) {
+                hasUserBeenFound = true;
+                usersVoting.push(playerStates[i].id);
+                updatePactivityBox(playerStates[i]);
+            }
+        }
+        console.table(usersVoting);
     }
     
+    //checking number of players and making sure we have more than 3
     if(leaderboad.length < 3)
     {
         document.getElementById('enter-box').placeholder = "hold up, waiting for some more idiots to join";
@@ -80,7 +103,7 @@ function updateLeaderBoard()
     {
         document.getElementById('enter-box').placeholder = "write a god damned story";
         document.getElementById('enter-box').disabled = false;
-    }
+    }    
 }
 
 function updateVoteBox()
@@ -100,7 +123,7 @@ function updateVoteBox()
             else
             {
                 document.getElementById("popup-vote").innerHTML +=
-                `<div class="pop-back${i + 1}">
+                `<div class="pop-back${i + 1}" disabled>
                 <div class="text-box" readonly disabled >${playerStates[i].line}</div>
                 <button><b>can't vote for self</b></button>
                 </div>`
@@ -119,8 +142,10 @@ function castVote(index)
     document.getElementById('prevent-player').style.display='block';
 }
 
-function updatePactivityBox()
+function updatePactivityBox(userData)
 {
-    const pactivityBox = document.getElementById('pactivity-box');
-
+    const pactivityBox = document.getElementById('Pactivity-box');
+    pactivityBox.innerHTML += 
+    `<div class = "author-name">${userData.name}'s line :</div>
+    <div class="story-line-written">${userData.line}</div>`;
 }

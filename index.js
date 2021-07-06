@@ -42,7 +42,6 @@ io.on("connection", (client) => {
         var j;
         for (var i = 0; i < playerStates.length; i++) {
             if (vote.candidate == playerStates[i].id) {
-                console.log("voted for : " + playerStates[i].name);
                 playerStates[i].votes++;
                 notAPlayer = 1;
                 totalVotes++;
@@ -87,7 +86,7 @@ io.on("connection", (client) => {
     }
 
     function countVotes() {
-        console.log("---------Counting Votes----------");
+        // console.log("---------Counting Votes----------");
         // // checking wheter we have all the votes
         // var votes = 0;
         // for (var i = 0; i < playerStates.length; i++) {
@@ -106,7 +105,6 @@ io.on("connection", (client) => {
             io.emit('new-story-line', playerStates[winner].line);
             gameState.story += playerStates[winner].line;
             updateLeaderBoard();
-            console.log("winner : " + playerStates[winner].name);
 
             //clearing off the array the next round
             for (var i = 0; i < playerStates.length; i++) {
