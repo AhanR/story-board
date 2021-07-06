@@ -11,15 +11,21 @@ const io = require("socket.io")(server, {
 const firstLines = require('./firstLines');
 const numberOfFirstLines = 30;
 var playerStates = [], gameState = { story: "A long time ago ", playerStates: playerStates }, random = 0, totalVotes = 0;
+var playerColours = ["#AD75E0","#D88361","#E2D62B","#6CC519","#19C5AE","#4FA3EC","#DD34FF","#790A0A"];
 
 io.on("connection", (client) => {
 
     client.emit("user-id", client.id);
-    playerStates.push({ name: "untitled", id: client.id, line: "", score: 0, votes: 0, voted: "" })
+    playerStates.push({ name: "untitled", id: client.id, line: "", score: 0, votes: 0, voted: "", colour : "#62B7D9"});
 
     client.on("new-player", (player, cb) => {
         for (var i = 0; i < playerStates.length; i++) {
             if (player.id == playerStates[i].id) {
+                //selecting colour
+                playerStates[i].colour = playerColours[0];
+                playerColours.splice(0,1);
+
+                //setting other player attributes
                 playerStates[i].name = player.name;
                 cb(gameState);
                 updateLeaderBoard();
@@ -59,8 +65,14 @@ io.on("connection", (client) => {
     });
 
     client.on("disconnect", () => {
+
         for (var i = 0; i < playerStates.length; i++) {
             if (client.id == playerStates[i].id) {
+
+                //handling colour deallocaction :
+                playerColours.push(playerStates[i].colour);
+
+                //handling votes exception :
                 if(playerStates[i].voted != '')
                 {
                     totalVotes--;
@@ -86,12 +98,6 @@ io.on("connection", (client) => {
     }
 
     function countVotes() {
-        // console.log("---------Counting Votes----------");
-        // // checking wheter we have all the votes
-        // var votes = 0;
-        // for (var i = 0; i < playerStates.length; i++) {
-        //     votes += playerStates[i].votes;
-        // }
         if (totalVotes == playerStates.length && playerStates.length != 0) {
 
             var winner = 0, winnerVotes = 0;

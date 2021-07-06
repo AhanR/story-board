@@ -38,6 +38,7 @@ body {
 .leaderboard h3 {
     color: antiquewhite;
     text-align: center;
+    overflow: auto;
 }
 
 .leaderboard hr {
@@ -45,9 +46,10 @@ body {
 }
 
 .player-list {
-    overflow :hidden;
+    overflow : auto;
 }
-.player-list div {
+
+.leaderboard-element {
     background-color: antiquewhite;
     height: max-content;
     width: 80%;
@@ -58,6 +60,12 @@ body {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.profile-colour {
+    border-radius: 500px;
+    height: 20px;
+    width: 20px;
 }
 
 .player-list p {
@@ -109,7 +117,7 @@ body {
     width: 94%;
     height: 25%;
     padding: 10px;
-    /* overflow: auto; */
+    overflow: auto;
     display: flex;
     flex-direction: column; 
     align-items: flex-start;
@@ -122,7 +130,7 @@ body {
 }
 
 .story-line-written {
-    background-color: aqua;
+    /* background-color: aqua; */
     border-radius: 10px;
     padding: 10px;
     margin: 5px;
@@ -179,23 +187,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* .popup-container .creators{
-    height: 100px;
-    width:390px;
-    background-color: aliceblue;
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px;
-    position: absolute;
-    left: 23%;
-    bottom: 25%;
 
-    animation-name: fadein;
-    animation-duration: 4s;
-}
-@keyframes fadein{
-    from{opacity: 0;}
-    to{opacity: 1;}
-} */
 .glass-container{
     display: flex;
     justify-content: space-around;
@@ -369,45 +361,37 @@ body {
     transform: scale(1.07);
 }
 
-.popup-vote .pop-back1 {
-    /* border-color: blueviolet; */
-    background-color: rgba(173, 117, 224);
+/* .popup-vote .pop-back1 {
+    background-color: #AD75E0;
 }
 
 .popup-vote .pop-back2 {
-    /* border-color: rgb(226, 95, 43); */
-    background-color: rgba(216, 131, 97);
+    background-color: #D88361;
 }
 
 .popup-vote .pop-back3 {
-    /* border-color: rgb(226, 214, 43); */
-    background-color: rgb(226, 214, 43);
+    background-color: #E2D62B;
 }
 
 .popup-vote .pop-back4 {
-    /* border-color: rgb(108, 197, 25); */
-    background-color: rgb(108, 197, 25);
+    background-color: #6CC519;
 }
 
 .popup-vote .pop-back5 {
-    /* border-color: rgb(25, 197, 174); */
-    background-color: rgb(25, 197, 174);
+    background-color: #19C5AE;
 }
 
 .popup-vote .pop-back6 {
-    /* border-color: rgb(64, 19, 102); */
-    background-color: rgb(79,163,236);
+    background-color: #4FA3EC;
 }
 
 .popup-vote .pop-back7 {
-    /* border-color: rgb(221, 52, 255); */
-    background-color: (221, 52, 255);
+    background-color: #DD34FF;
 }
 
 .popup-vote .pop-back8 {
-    /* border-color: rgb(121, 10, 10); */
-    background-color: rgb(121, 10, 10);
-}
+    background-color: #790A0A;
+} */
 
 .prevent-player {
     width: 100%;

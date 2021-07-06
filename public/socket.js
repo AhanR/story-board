@@ -70,17 +70,14 @@ function updateLeaderBoard()
     //adding elements to the leaderboard
     for (var i = 0; i < leaderboad.length; i++) {
         document.getElementById("player-list").innerHTML +=
-            `<div>${playerStates[i].name}  <p>${playerStates[i].score}</p></div>`;
+            `<div class = "leaderboard-element"><div class = "profile-colour" style="background-color: ${leaderboad[i].colour};"></div>${leaderboad[i].name}  <p>${leaderboad[i].score}</p></div>`;
 
-        
         //findind new text content
         var flag = 0;
         if (!hasUserBeenFound) {
-            console.log(usersVoting);
             for (var j = 0; j < usersVoting.length; j++) {
                 if (usersVoting[j] == playerStates[i].id) {
                     flag++
-                    console.log("we here");
                     break;
                 }
             }
@@ -90,7 +87,6 @@ function updateLeaderBoard()
                 updatePactivityBox(playerStates[i]);
             }
         }
-        console.table(usersVoting);
     }
     
     //checking number of players and making sure we have more than 3
@@ -115,7 +111,7 @@ function updateVoteBox()
         {
             if (playerStates[i].id != userId) {
                 document.getElementById("popup-vote").innerHTML +=
-                `<div class="pop-back${i + 1}">
+                `<div class="pop-back${i + 1}" style="background-color: ${playerStates[i].colour};">
                 <div class="text-box" readonly disabled >${playerStates[i].line}</div>
                 <button onclick = "castVote(${i})"><b>Vote for ${playerStates[i].name}</b></button>
                 </div>`
@@ -123,7 +119,7 @@ function updateVoteBox()
             else
             {
                 document.getElementById("popup-vote").innerHTML +=
-                `<div class="pop-back${i + 1}" disabled>
+                `<div class="pop-back${i + 1}" disabled style="background-color: ${playerStates[i].colour};">
                 <div class="text-box" readonly disabled >${playerStates[i].line}</div>
                 <button><b>can't vote for self</b></button>
                 </div>`
@@ -147,5 +143,5 @@ function updatePactivityBox(userData)
     const pactivityBox = document.getElementById('Pactivity-box');
     pactivityBox.innerHTML += 
     `<div class = "author-name">${userData.name}'s line :</div>
-    <div class="story-line-written">${userData.line}</div>`;
+    <div class="story-line-written" style="background-color: ${userData.colour};">${userData.line}</div>`;
 }
