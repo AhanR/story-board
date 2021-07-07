@@ -34,6 +34,13 @@
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
             }
         }
+
+        window.onkeyup = e =>{
+            if((e.code == "Enter" || e.code == "NumpadEnter") && userName == "")
+            {
+                check();
+            }
+        }
     </script>
     <!-- __________________ Starting Popup ______________ -->
     <div class="popup-container" id="submit-user">
