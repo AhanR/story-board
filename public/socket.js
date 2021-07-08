@@ -153,12 +153,3 @@ function checkEnterStory() {
         sendStoryLine();
     }
 }
-
-// function checkEnterUserName() {
-//     var last = document.getElementById('enter-name').value.slice(-1);
-//     console.log(last);
-//     if(last == "\n")
-//     {
-//         check();
-//     }
-// }

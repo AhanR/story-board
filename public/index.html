@@ -36,8 +36,21 @@
         }
 
         window.onkeyup = e =>{
-            if((e.code == "Enter" || e.code == "NumpadEnter") && userName == "")
-            {
+            if (document.getElementById('enter-name').value.length > 0 && document.getElementById('enter-name').value.length < 17) {
+                document.getElementById('enter-name').style.borderBottomColor = "#009A44";
+                document.getElementById('sub').style.backgroundColor = "#009A44";
+            }
+            else if (document.getElementById('enter-name').value.length > 16) {
+                document.getElementById('enter-name').style.borderBottomColor = "#FF0000";
+                document.getElementById('sub').style.backgroundColor = "#faebd7";
+                alert("god damn it, use a shorter name. You're intimidating little timmy");
+            }
+            else if (document.getElementById('enter-name').value.length == 0) {
+                document.getElementById('enter-name').style.borderBottomColor = "#faebd7"
+                document.getElementById('sub').style.backgroundColor = "#faebd7";
+            }
+
+            if ((e.code == "Enter" || e.code == "NumpadEnter") && userName == "" && document.getElementById('enter-name').value.length < 17) {
                 check();
             }
         }
