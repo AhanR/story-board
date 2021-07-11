@@ -22,8 +22,16 @@ io.on("connection", (client) => {
         for (var i = 0; i < playerStates.length; i++) {
             if (player.id == playerStates[i].id) {
                 //selecting colour
-                playerStates[i].colour = playerColours[0];
-                playerColours.splice(0,1);
+                if(player.colour == "no colour")
+                {
+                    playerStates[i].colour = playerColours[0];
+                    playerColours.splice(0,1);
+                    playerColours.push(playerStates[i].colour);
+                }
+                else
+                {
+                    playerStates[i].colour = player.colour;
+                }
 
                 //setting other player attributes
                 playerStates[i].name = player.name;
@@ -69,9 +77,6 @@ io.on("connection", (client) => {
         for (var i = 0; i < playerStates.length; i++) {
             if (client.id == playerStates[i].id) {
 
-                //handling colour deallocaction :
-                playerColours.push(playerStates[i].colour);
-
                 //handling votes exception :
                 if(playerStates[i].voted != '')
                 {
@@ -109,18 +114,18 @@ io.on("connection", (client) => {
             }
             playerStates[winner].score++;
             //--------------------------------------------------------check this -------------------------------------------
-            // //checking for the brightness of the colour
-            // var r = parseInt(`${playerStates[winner].colour}`.splice(1,2));
-            // var g = parseInt(playerStates[winner].colour.splice(3,2));
-            // var b = parseInt(playerStates[winner].colour.splice(5,2));
+            //checking for the brightness of the colour
             var fontColour = "white";
-            // if(Math.sqrt(r*r + g*g + b*b) > Math.sqrt(parseInt('7F')*parseInt('7F')*3))
-            // {
-            //     fontColour = "black";
-            // }
-            // else{
-            //     fontColour = "white";
-            // }
+            var r = hexToInt(playerStates[winner].colour.substring(1, 3));
+            var g = hexToInt(playerStates[winner].colour.substring(3, 5));
+            var b = hexToInt(playerStates[winner].colour.substring(5, 7));
+            if(Math.sqrt(r*r + g*g + b*b) > 194)
+            {
+                fontColour = "black";
+            }
+            else{
+                fontColour = "white";
+            }
             storyLineWinner = `<a title = "${playerStates[winner].name}'s line" style = "background-color : ${playerStates[winner].colour}; color : ${fontColour}">${playerStates[winner].line}</a>`
             io.emit('new-story-line', storyLineWinner);
             gameState.story += storyLineWinner;
@@ -134,6 +139,75 @@ io.on("connection", (client) => {
             }
             totalVotes = 0;
         }
+    }
+
+    function hexToInt(num)
+    {
+        var result = 0;
+        var t = 0;
+        while(t < 2)
+        {
+            var letter = num.substring(0,1);
+            letter.toUpperCase();
+            switch(letter)
+            {
+                case '1' :
+                    result += Math.pow(16,t)*1;
+                    break;
+                case '2' :
+                    result += Math.pow(16,t)*2;
+                    break;
+                case '3' :
+                    result += Math.pow(16,t)*3;
+                    break;
+                case '4' :
+                    result += Math.pow(16,t)*4;
+                    break;
+                case '5' :
+                    result += Math.pow(16,t)*5;
+                    break;
+                case '6' :
+                    result += Math.pow(16,t)*6;
+                    break;
+                case '1' :
+                    result += Math.pow(16,t)*1;
+                    break;
+                case '7' :
+                    result += Math.pow(16,t)*7;
+                    break;
+                case '8' :
+                    result += Math.pow(16,t)*8;
+                    break;
+                case '9' :
+                    result += Math.pow(16,t)*9;
+                    break;
+                case '0' :
+                    result += Math.pow(16,t)*0;
+                    break;
+                case 'A' :
+                    result += Math.pow(16,t)*10;
+                    break;
+                case 'B' :
+                    result += Math.pow(16,t)*11;
+                    break;
+                case 'C' :
+                    result += Math.pow(16,t)*12;
+                    break;
+                case 'D' :
+                    result += Math.pow(16,t)*13;
+                    break;
+                case 'E' :
+                    result += Math.pow(16,t)*14;
+                    break;
+                case 'F' :
+                    result += Math.pow(16,t)*15;
+                    break;
+                default :
+                    break;
+            }
+            t++;
+        }
+        return result;
     }
 });
 

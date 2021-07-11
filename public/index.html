@@ -5,19 +5,23 @@
     <title>Story-Board</title>
     <link rel="stylesheet" href="index.css">
     <link rel="shortcut icon" href="story-board-icon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 
 <body>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./socket.js"></script>
+    <!-- <script src="https://unpkg.com/vanilla-picker@2"></script> -->
     <script>
+        var colour = "#62B7D9";
         function check() {
             if (document.getElementById('enter-name').value.length == 0) { //enter-name refers to popup textbox
                 alert("For fuck's sake enter your username daug!!!");
             }
             else {
+                selectColour();
                 userName = document.getElementById('enter-name').value;
-                var userState = { name: userName, id: userId, line: "" };
+                var userState = { name: userName, id: userId, line: "", colour: colour };
                 socket.emit("new-player", userState, (gameState) => {
                     if(gameState.playerStates.length > 8)
                     {
@@ -62,6 +66,10 @@
             <div class="popup-screen">
                 <h2>Enter Username</h2>
                 <input type="text" placeholder="Username" id="enter-name" required autocomplete="off">
+                <p type="text" name="colour-selector-name" id="colour-selector-name">selct a colour</p>
+                <div class="colour-input">
+                    <input type="color" name="colour-selector" id="colour-selector" onmouseleave="selectColour()">
+                </div>
                 <button type="submit" id="sub" onclick="check()">Enter</button>
             </div>
             <div class="rule-box">

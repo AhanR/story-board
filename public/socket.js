@@ -154,3 +154,18 @@ function checkEnterStory() {
         sendStoryLine();
     }
 }
+
+//getting colour input
+function selectColour() {
+    var hexSelector = document.getElementById('colour-selector-name');
+    var colourPicker = document.getElementById('colour-selector');
+    hexSelector.innerHTML = colourPicker.value;
+    if(hexSelector.innerText != '#000000')
+    {
+        colour = hexSelector.innerText;
+    }
+    else
+    {
+        colour = "no colour";
+    }
+}
