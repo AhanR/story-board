@@ -1,5 +1,4 @@
 const socket = io.connect('https://story-board-game.herokuapp.com/');
-// const socket = io("http://localhost:3000");
 var userId, userName = "", playerStates = [] , story = "", isPlayerVoting = false;
 var counter = 0;
 var usersVoting = [], hasUserBeenFound = false;
@@ -48,7 +47,7 @@ function sendStoryLine() {
 
 function addStoryToBox(storyLine){
     story += storyLine;
-    document.getElementById("voted-storybox").textContent = story;
+    document.getElementById("voted-storybox").innerHTML = story;
 }
 
 function updateLeaderBoard()
@@ -144,6 +143,8 @@ function updatePactivityBox(userData)
     pactivityBox.innerHTML += 
     `<div class = "author-name">${userData.name}'s line :</div>
     <div class="story-line-written" style="background-color: ${userData.colour};">${userData.line}</div>`;
+    var xH = pactivityBox.scrollHeight;
+    pactivityBox.scrollTo(0, xH);
 }
 
 function checkEnterStory() {

@@ -19,7 +19,7 @@ body {
     width: 96%;
     height: 20%;
 }
-.game-title .title-box{
+.title-box{
     text-shadow: 0 0 3px #494949, 0 0 5px #000000;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
@@ -32,7 +32,7 @@ body {
     box-shadow: 0px 5px 15px;
     height: 83vh;
     width: 24vw;
-    padding: 10px;
+    padding: 5px;
 }
 
 .leaderboard h3 {
@@ -91,7 +91,7 @@ body {
     width: 70vw;
     height: 83vh;
     box-shadow: 0px 5px 15px;
-    padding: 10px; 
+    padding: 5px; 
 
     display: flex;
     justify-content: space-between;
@@ -107,6 +107,7 @@ body {
     width: 100%;
     height: 45%;
     padding: 10px;
+    overflow: auto;
 }
 
 .Pactivity-box{
@@ -137,7 +138,7 @@ body {
     word-wrap: normal;
 }
 
-.box-container .enter-box {
+.enter-box {
     font-size: large;
     border-radius: 10px;
     width: 88%;
@@ -218,7 +219,7 @@ body {
     to{transform: scale(1);}
 }
 
-.glass-container .rule-box{
+.rule-box{
     background: none;
     text-align: start;
     font-size: medium;
@@ -228,9 +229,10 @@ body {
     color: antiquewhite;
     margin-right: 10px;
     order: 1;
+    word-wrap: normal;
 }
 
-.glass-container .popup-screen {
+.popup-screen {
     /*maintain 3:2 width:height*/
     width: 390px;
     height: 260px;
@@ -288,15 +290,14 @@ body {
     height: 100vh;
     width: 100vw;
     z-index: 1002;
-
+    background-color: rgb(16, 67, 161);
+    background-image: url(in-game-tile.png);
+    background-size: 300px;
 }
 
 .popup-vote {
     width: 100%;
     height: 100%;
-    background-color: rgb(16, 67, 161);
-    background-image: url(in-game-tile.png);
-    background-size: 300px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -309,10 +310,10 @@ body {
 }
 
 .popup-vote>div {
-    height: max-content;
+    height: fit-content;
     min-width: 50px;
-    width: max-content;
-    max-width: 20%;
+    width: fit-content;
+    max-width: 25%;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -321,18 +322,25 @@ body {
     padding: 5px;
     border-width: 5px;
     margin: 5px;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.popup-vote>div:hover {
+    transform: scale(1.02);
 }
 
 .text-box {
     background-color: rgba(255,255,255,0.5); 
     width: 84%;
-    height: max-content;
-    max-height: 100%;
+    height: fit-content;
+    max-height: 50vh;
     border-radius: 10px;
     word-wrap: normal;
     text-align: center;
     padding: 10px;
     margin: 5px;
+    overflow: auto;
 }
 
 .popup-vote button {
@@ -343,12 +351,14 @@ body {
     border: none;
     width: 90%;
     margin: 5px;
-    
+    transform: scale(1);
+    transition: 0.3s;   
 }
+
 .popup-vote button:hover{
     background-color: black;
     color: white;
-    transform: scale(1.07);
+    transform: scale(1.02);
 }
 
 .prevent-player {
@@ -364,6 +374,7 @@ body {
     animation: fade 500ms linear 0ms infinite;
     animation-duration: 4s ;
 }
+
 @keyframes fade{
     0%   {background-color:rgba(16, 56, 131, 0.6);}
     50%  {background-color:rgba(29, 180, 160, 0.6);}
@@ -384,6 +395,7 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
 /*Scroll bar style*/
 ::-webkit-scrollbar {
     width: 20px;
@@ -398,20 +410,34 @@ body {
 ::-webkit-scrollbar-thumb {
     background: rgb(66, 148, 224); 
     border-radius: 10px;
+    transform: 0.2s;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #b2cdff; 
+    /* background: #b2cdff;  */
+    background: none;
+    border: solid rgb(66, 148, 224) 3px;
 }
-@media  screen and (min-width:380px) and (max-width:1080px) {
+
+
+@media  screen and (min-width:380px) and (max-width:1200px) and (min-height:1000px) and (max-height:2500px){
+    .game-title {
+        font-size: 45px;
+        height: fit-content;
+    }
+
+    .game-title h1 {
+        margin: 20px;
+    }
+
     .popup-container {
         position: fixed;
         background-image: url(user-name-tile.png);
-        background-size: 300px;
+        background-size: 800px;
         background-color:rgb(13, 53, 139);
-        height: 100%;
-        width: 100%;
+        height: 100vh;
+        width: 100vw;
         
         z-index: 1001;
         display: flex;
@@ -423,12 +449,13 @@ body {
         display: flex;
         justify-content: space-around;
         align-content:center;
-        flex-wrap: wrap;
         flex-direction: column;
+        
+        overflow: auto;
     
         position: relative;
-        width: 850px;
-        height: 55%;
+        width: 100vw;
+        height: 100vh;
         padding: 30px;
         border-radius: 25px;
     
@@ -437,51 +464,64 @@ body {
         animation-duration: 0.2s;
     
     }
-    @supports ((-webkit-backdrop-filter: blur(1em)) or (backdrop-filter: blur(1em))) {
-        .glass-container {
-          /* background-color: rgba(255, 255, 255, .5); */
-          -webkit-backdrop-filter: blur(1em);
-          backdrop-filter: blur(1em);
-        }
-      }
     
-    .glass-container .rule-box{
+    .rule-box{
         background: none;
+        align-items: center;
         text-align: start;
-        font-size: 22px;
+        font-size: 42px;
         border-radius: 15px;
-        height: 440px;
-        width: 400px;
+        min-height: 50vh;
+        height: fit-content;
+        width: 80vw;
         color: antiquewhite;
         margin-right: 10px;
         order: 2;
+        word-wrap: normal;
     }
     
-    .glass-container .popup-screen {
-        /*maintain 3:2 width:height*/
-        width: 390px;
-        height: 200px;
+    .popup-screen {
+        width: 80vw;
+        height: 30vh;
         background: none;
         border-radius: 10px;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
         align-items: center;
-        order: 1;
+        order: 2;
         margin-left: 10px;
+        font-size: 42px;
+    }
+
+    .popup-screen input{
+        text-align: center;
+        width: 75%;
+        border-bottom-width: 5px;
+        margin-bottom: 3%;
+    }
+
+    .popup-screen input::placeholder{
+        text-align: center;
+    }
+
+    .popup-screen button {
+        font-size: 42px;
+        width: 80%;
+        height: 80px;
+        border-radius: 30px;
     }
 
     body {
         background-image: url(in-game-tile.png);
-        background-size: 300px;
+        background-size: 800px;
         background-color: rgb(31, 83, 151);
         margin: 0%;
         display: flex;
         flex-direction: row;
-        /* justify-content: space-evenly; */
-        row-gap: 3em;
         align-content: center;
         flex-wrap: wrap;
+        overflow: auto;
     
     }
     .game-title{
@@ -490,13 +530,17 @@ body {
         height: 20%;
         order: 1;
     }
+
     .box-container {
-        background-color: rgba(16, 67, 161,0.5);
-        border-radius: 10px;
-        width: 76vw;
-        height: 48vh;
-        box-shadow: 0px 5px 15px;
-        padding: 10px; 
+        font-size: 45px;
+        background-color: rgba(16, 56, 131, 0);
+        border-radius: 30px;
+        width: 100vw;
+        height: fit-content;
+        box-shadow: 0 0 0;
+        padding: 30px;
+        padding-top: 0%;
+        padding-bottom: 0%;
     
         display: flex;
         justify-content: space-between;
@@ -504,15 +548,170 @@ body {
         align-items: center;
         order: 2;
     }
-    .leaderboard {
-        background-color: rgba(16, 67, 161,0.5);
-        border-radius: 10px;
-        box-shadow: 0px 5px 15px;
-        height: 34vh;
-        width: 42vw;
-        padding: 10px;
-        overflow: auto;
-        order: 3;
+
+    .voted-storybox {
+        padding: 15px;
+        border-width: 5px;
+        border-radius: 30px;
+        overflow : auto;
+        max-height: 30vh;
+        min-height: 300px;
+        margin: 2%;
     }
+
+    .Pactivity-box {
+        border-width: 5px;
+        border-radius: 30px;
+        padding: 15px;
+        min-height: 300px;
+        max-height: 20vh;
+        margin: 2%;
+    }
+
+    .story-line-written {
+        font-size: 45px;
+        border-radius: 30px;
+        padding: 15px;
+    }
+
+    .author-name {
+        font-size: 45px;
+    }
+
+    .text-area {
+        margin: 2%;
+    }
+
+    .text-area textarea{
+        font-size: 45px;
+        width: 74%;
+        border-radius: 30px;
+        padding: 2%;
+    }
+
+    .text-area button {
+        font-size: 45px;
+        width: 20%;
+        border-radius: 30px;
+        border: none;
+    }
+
+    .leaderboard {
+        font-size: 45px;
+        background-color: rgba(16, 67, 161,0);
+        border-radius: 30px;
+        box-shadow: 0px 0px 0px;
+        border: solid antiquewhite 5px;
+        height: fit-content;
+        width: 90vw;
+        padding: 15px;
+        order: 3;
+        margin: 2%;
+    }
+
+    .leaderboard-element {
+        border-radius: 30px;
+    }
+
+    .profile-colour {
+        width: 60px;
+        height: 60px;
+    }
+
+    .pop-back {
+        overflow: auto;
+        overflow-x: hidden;
+        background-color: rgba(16, 56, 131, 1);
+        background-image: url(in-game-tile.png);
+        background-size: 800px;
+    }
+
+    .popup-vote {
+        width: 100vw;
+        min-height: 100vh;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        /* overflow: auto; */
+       flex-wrap: nowrap;
+    }
+
+    .popup-vote>div {
+        height: fit-content;
+        width: fit-content;
+        min-width: 45vw;
+        max-width: 65vw;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        /* justify-content: space-around; */
+        flex-direction: column;
+        padding: 15px;
+        border-width: 15px;
+        margin: 15px;
+        font-size: 45px;
+    }
+
+    .text-box {
+        background-color: rgba(255,255,255,0.5); 
+        width: 84%;
+        height: max-content;
+        min-height: 80px;
+        max-height: 500px;
+        border-radius: 30px;
+        word-wrap: normal;
+        text-align: center;
+        padding: 30px;
+        margin: 15px;
+        overflow: auto;
+    }
+
+    .popup-vote button {
+        padding: 30px;
+        background-color:whitesmoke;
+        color: black;
+        border-radius: 30px;
+        border: none;
+        width: 90%;
+        margin: 15px;
+        font-size: 45px;
+        
+    }
+
+    /*Scroll bar style*/
+    ::-webkit-scrollbar {
+        transform: translateX(-100%);
+        width: 5vw;
+        border-radius: 2.5vw;
+    }
+
+    .prevent-player h2 {
+        font-size: 60px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        border-radius: 5vw;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: antiquewhite; 
+        border: solid rgb(16, 67, 161) 7px;
+        border-radius: 30px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b2cdff; 
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1em)) or (backdrop-filter: blur(1em))) {
+        .glass-container {
+          -webkit-backdrop-filter: blur(1em);
+          backdrop-filter: blur(1em);
+        }
+      }
 }
 
