@@ -10,7 +10,7 @@ const io = require("socket.io")(server, {
 
 const firstLines = require('./firstLines');
 const numberOfFirstLines = 30;
-var playerStates = [], gameState = { story: "A long time ago ", playerStates: playerStates }, random = 0, totalVotes = 0;
+var playerStates = [], gameState = { story: `<a title = "computer generated line line" style = "background-color : rgb(31, 83, 151); color : white">A long time ago </a>`, playerStates: playerStates }, random = 0, totalVotes = 0;
 var playerColours = ["#AD75E0","#D88361","#E2D62B","#6CC519","#19C5AE","#4FA3EC","#DD34FF","#790A0A"];
 
 io.on("connection", (client) => {
@@ -94,6 +94,7 @@ io.on("connection", (client) => {
     function resetGameState() {
         random = (random + 1) % numberOfFirstLines;
         gameState.story = firstLines(random);
+        gameState.story = `<a title = "computer generated line line" style = "background-color : rgb(31, 83, 151); color : white">${firstLines(random)}</a>`;
         totalVotes = 0;
     }
 
@@ -108,8 +109,23 @@ io.on("connection", (client) => {
                 }
             }
             playerStates[winner].score++;
-            io.emit('new-story-line', playerStates[winner].line);
-            gameState.story += playerStates[winner].line;
+            //--------------------------------------------------------check this -------------------------------------------
+            // //checking for the brightness of the colour
+            // var r = parseInt(`${playerStates[winner].colour}`.splice(1,2));
+            // var g = parseInt(playerStates[winner].colour.splice(3,2));
+            // var b = parseInt(playerStates[winner].colour.splice(5,2));
+            // var fontColour = "blue";
+            // if(Math.sqrt(r*r + g*g + b*b) > Math.sqrt(parseInt('7F')*parseInt('7F')*3))
+            // {
+            //     fontColour = "black";
+            // }
+            // else{
+            //     fontColour = "white";
+            // }
+            storyLineWinner = `<a title = "${playerStates[winner].name}'s line" style = "background-color : ${playerStates[winner].colour}; color : ${fontColour}">${playerStates[winner].line}</a>`
+            io.emit('new-story-line', storyLineWinner);
+            // gameState.story += playerStates[winner].line;
+            gameState.story += storyLineWinner;
             updateLeaderBoard();
 
             //clearing off the array the next round

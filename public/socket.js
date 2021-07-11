@@ -48,7 +48,7 @@ function sendStoryLine() {
 
 function addStoryToBox(storyLine){
     story += storyLine;
-    document.getElementById("voted-storybox").textContent = story;
+    document.getElementById("voted-storybox").innerHTML = story;
 }
 
 function updateLeaderBoard()
