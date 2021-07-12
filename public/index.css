@@ -473,11 +473,14 @@ body {
         background-color:rgb(13, 53, 139);
         height: 100vh;
         width: 100vw;
-        
+        -webkit-backdrop-filter: blur(1em);
+        backdrop-filter: blur(1em);
+
         z-index: 1001;
         display: flex;
         justify-content: center;
         align-items: center;
+        /* overflow: auto; */
     }
     
     .glass-container{
@@ -491,9 +494,10 @@ body {
     
         position: relative;
         width: 100vw;
+        min-height: 1450px;
         height: 100vh;
-        padding: 30px;
-        border-radius: 25px;
+        padding: 0px;
+        border-radius: 0px;
     
         background: rgba(255, 255, 255, 0.2);
         animation:zoom;
@@ -535,11 +539,13 @@ body {
         text-align: center;
         width: 75%;
         border-bottom-width: 5px;
-        margin-bottom: 3%;
+        margin-bottom: 0%;
+        /* margin-bottom: 3%; */
     }
 
     .popup-screen h2 {
-        margin-bottom: 30px;
+        margin-bottom: 0px;
+        /* margin-bottom: 30px; */
     }
 
     .popup-screen input::placeholder{
@@ -559,7 +565,8 @@ body {
         padding: 0%;
         height: 100px;
         width: 80%;
-        margin-bottom: 60px;
+        margin-bottom: 0px;
+        /* margin-bottom: 60px; */
     }
 
     .colour-selector{
@@ -586,7 +593,6 @@ body {
         align-content: center;
         flex-wrap: wrap;
         overflow: auto;
-    
     }
     .game-title{
         background-color:none;
@@ -636,6 +642,7 @@ body {
         font-size: 45px;
         border-radius: 30px;
         padding: 15px;
+        padding-right: 30px;
     }
 
     .author-name {
