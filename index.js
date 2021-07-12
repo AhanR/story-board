@@ -113,7 +113,6 @@ io.on("connection", (client) => {
                 }
             }
             playerStates[winner].score++;
-            //--------------------------------------------------------check this -------------------------------------------
             //checking for the brightness of the colour
             var fontColour = "white";
             var r = hexToInt(playerStates[winner].colour.substring(1, 3));

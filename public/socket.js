@@ -139,10 +139,20 @@ function castVote(index)
 
 function updatePactivityBox(userData)
 {
+    var fontColour = "white";
+    var r = hexToInt(userData.colour.substring(1, 3));
+    var g = hexToInt(userData.colour.substring(3, 5));
+    var b = hexToInt(userData.colour.substring(5, 7));
+    if (Math.sqrt(r * r + g * g + b * b) > 194) {
+        fontColour = "black";
+    }
+    else {
+        fontColour = "white";
+    }
     const pactivityBox = document.getElementById('Pactivity-box');
     pactivityBox.innerHTML += 
     `<div class = "author-name">${userData.name}'s line :</div>
-    <div class="story-line-written" style="background-color: ${userData.colour};">${userData.line}</div>`;
+    <div class="story-line-written" style="background-color: ${userData.colour}; color : ${fontColour}">${userData.line}</div>`;
     var xH = pactivityBox.scrollHeight;
     pactivityBox.scrollTo(0, xH);
 }
@@ -155,7 +165,6 @@ function checkEnterStory() {
     }
 }
 
-//getting colour input
 function selectColour() {
     var hexSelector = document.getElementById('colour-selector-name');
     var colourPicker = document.getElementById('colour-selector');
@@ -168,4 +177,70 @@ function selectColour() {
     {
         colour = "no colour";
     }
+}
+
+function hexToInt(num) {
+    var result = 0;
+    var t = 0;
+    while (t < 2) {
+        var letter = num.substring(0, 1);
+        letter.toUpperCase();
+        switch (letter) {
+            case '1':
+                result += Math.pow(16, t) * 1;
+                break;
+            case '2':
+                result += Math.pow(16, t) * 2;
+                break;
+            case '3':
+                result += Math.pow(16, t) * 3;
+                break;
+            case '4':
+                result += Math.pow(16, t) * 4;
+                break;
+            case '5':
+                result += Math.pow(16, t) * 5;
+                break;
+            case '6':
+                result += Math.pow(16, t) * 6;
+                break;
+            case '1':
+                result += Math.pow(16, t) * 1;
+                break;
+            case '7':
+                result += Math.pow(16, t) * 7;
+                break;
+            case '8':
+                result += Math.pow(16, t) * 8;
+                break;
+            case '9':
+                result += Math.pow(16, t) * 9;
+                break;
+            case '0':
+                result += Math.pow(16, t) * 0;
+                break;
+            case 'A':
+                result += Math.pow(16, t) * 10;
+                break;
+            case 'B':
+                result += Math.pow(16, t) * 11;
+                break;
+            case 'C':
+                result += Math.pow(16, t) * 12;
+                break;
+            case 'D':
+                result += Math.pow(16, t) * 13;
+                break;
+            case 'E':
+                result += Math.pow(16, t) * 14;
+                break;
+            case 'F':
+                result += Math.pow(16, t) * 15;
+                break;
+            default:
+                break;
+        }
+        t++;
+    }
+    return result;
 }
