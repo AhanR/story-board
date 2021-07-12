@@ -707,7 +707,7 @@ body {
         flex-direction: column;
         justify-content: space-around;
         /* overflow: auto; */
-       flex-wrap: nowrap;
+        flex-wrap: nowrap;
     }
 
     .popup-vote>div {
@@ -724,6 +724,7 @@ body {
         border-width: 15px;
         margin: 15px;
         font-size: 45px;
+        overflow-y: hidden;
     }
 
     .text-box {
