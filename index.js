@@ -118,7 +118,7 @@ io.on("connection", (client) => {
             var r = hexToInt(playerStates[winner].colour.substring(1, 3));
             var g = hexToInt(playerStates[winner].colour.substring(3, 5));
             var b = hexToInt(playerStates[winner].colour.substring(5, 7));
-            if(Math.sqrt(r*r + g*g + b*b) > 194)
+            if(Math.sqrt(r*r + g*g + b*b) > 219)
             {
                 fontColour = "black";
             }
@@ -147,7 +147,6 @@ io.on("connection", (client) => {
         while(t < 2)
         {
             var letter = num.substring(0,1);
-            letter.toUpperCase();
             switch(letter)
             {
                 case '1' :
@@ -183,22 +182,22 @@ io.on("connection", (client) => {
                 case '0' :
                     result += Math.pow(16,t)*0;
                     break;
-                case 'A' :
+                case 'a' :
                     result += Math.pow(16,t)*10;
                     break;
-                case 'B' :
+                case 'b' :
                     result += Math.pow(16,t)*11;
                     break;
-                case 'C' :
+                case 'c' :
                     result += Math.pow(16,t)*12;
                     break;
-                case 'D' :
+                case 'd' :
                     result += Math.pow(16,t)*13;
                     break;
-                case 'E' :
+                case 'e' :
                     result += Math.pow(16,t)*14;
                     break;
-                case 'F' :
+                case 'f' :
                     result += Math.pow(16,t)*15;
                     break;
                 default :
