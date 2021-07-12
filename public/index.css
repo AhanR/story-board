@@ -724,7 +724,7 @@ body {
         border-width: 15px;
         margin: 15px;
         font-size: 45px;
-        overflow-y: hidden;
+        overflow-x: hidden;
     }
 
     .text-box {

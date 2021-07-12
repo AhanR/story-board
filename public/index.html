@@ -2,16 +2,34 @@
 <html>
 
 <head>
-    <title>Story-Board</title>
+    <title>Story Board</title>
+    <!-- ----------------------------------------------------------------------------------------------------------------------- -->
+    <meta name="description"
+        content="Story Board is a collaborative story writing game based on writing lines and voting for the best ones. Join and play with people around the world">
+    <meta name="keywords"
+        content="story board, story-board, board.ml, story.ml, story-board ml, multiplayer story writing, story, voting, story voting, collaborative story writing, story writing game, story game, game, fun game, online game, simple game, free, friends">
+    <meta name="robots" content="index">
+    <meta http-equiv="content-language" content="en">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Story-Board">
+    <meta property="og:url" content="https://story-board-game.herokuapp.com/">
+    <meta property="og:site_name" content="Story-Board">
+    <meta property="og:image" content="https://story-board-game.herokuapp.com/thumbnail.png">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Story Board - a collaborative story writing game">
+    <meta name="twitter:description"
+        content="Story Board is a collaborative story writing game based on writing lines and voting for the best ones. Join and play with people around the world">
+    <meta name="twitter:image" content="https://story-board-game.herokuapp.com/thumbnail.png">
+    <!-- ------------------------------------------------------------------------------------------------------------------ -->
     <link rel="stylesheet" href="index.css">
     <link rel="shortcut icon" href="story-board-icon.png" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 
 <body>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./socket.js"></script>
-    <!-- <script src="https://unpkg.com/vanilla-picker@2"></script> -->
     <script>
         var colour = "#62B7D9";
         function check() {
