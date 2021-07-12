@@ -33,6 +33,7 @@ body {
     height: 83vh;
     width: 24vw;
     padding: 5px;
+    overflow: auto;
 }
 
 .leaderboard h3 {
@@ -43,10 +44,6 @@ body {
 
 .leaderboard hr {
     width: 80%;
-}
-
-.player-list {
-    overflow : auto;
 }
 
 .leaderboard-element {
@@ -682,6 +679,7 @@ body {
         padding: 15px;
         order: 3;
         margin: 2%;
+        overflow: visible;
     }
 
     .leaderboard-element {

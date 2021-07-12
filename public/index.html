@@ -23,17 +23,8 @@
                 userName = document.getElementById('enter-name').value;
                 var userState = { name: userName, id: userId, line: "", colour: colour };
                 socket.emit("new-player", userState, (gameState) => {
-                    if(gameState.playerStates.length > 8)
-                    {
-                        alert("fuck off, we're too busy. No more players allowed");
-                        document.getElementById('prevent-play').style.display='block';
-                        socket.disconnect();
-                    }
-                    else
-                    {
-                        playerStates = gameState.playerStates;
-                        addStoryToBox(gameState.story);
-                    }
+                    playerStates = gameState.playerStates;
+                    addStoryToBox(gameState.story);
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
             }
@@ -76,10 +67,13 @@
                 <h3><b>How to Play?</b></h3>
                 <hr>
                 <ul>
-                    <li>Players will be given a piece of story.</li>
-                    <li>Enter your spice/part to the story in the "Text box".</li>
-                    <li>Once entered a session will be conducted among the players to select/vote the wildest (is what I'd like to say) sentence to progress the story.</li>
-                    <li>The highest voted sentence is displayed in the story and progresses the story with the winning player scoring a point.</li>
+                    <li>You need atleast 3 players to play the game</li>
+                    <li>Pick a colour and a name</li>
+                    <li>Write a story line in continuation with the game</li>
+                    <li>Vote the line that you think is the least lame</li>
+                    <li>The highest voted line gets appended to the story</li>
+                    <li>The person who wrote it gets a point</li>
+                    <li>Continue this cycle till you get bored of the game</li>
                 </ul>
             </div>
             <!-- <div class="creators">
