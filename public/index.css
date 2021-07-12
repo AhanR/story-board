@@ -36,7 +36,7 @@ body {
 }
 
 .leaderboard h3 {
-    color: antiquewhite;
+    color: white;
     text-align: center;
     overflow: auto;
 }
@@ -50,7 +50,7 @@ body {
 }
 
 .leaderboard-element {
-    background-color: antiquewhite;
+    background-color: white;
     height: max-content;
     width: 80%;
     padding: 5%;
@@ -101,8 +101,8 @@ body {
 
 
 .voted-storybox {
-    border: antiquewhite solid 3px;
-    background-color: antiquewhite;
+    border: white solid 3px;
+    background-color: white;
     border-radius: 10px;
     width: 100%;
     height: 45%;
@@ -113,7 +113,7 @@ body {
 .Pactivity-box{
     backdrop-filter: blur(2px);
     border-radius: 10px;
-    border: antiquewhite solid 3px;
+    border: white solid 3px;
     width: 100%;
     height: 30%;
     padding: 10px;
@@ -125,7 +125,7 @@ body {
 
 .author-name {
     background-color: none;
-    color: antiquewhite;
+    color: white;
     margin: 5px;
 }
 
@@ -142,8 +142,8 @@ body {
     font-size: large;
     border-radius: 10px;
     width: 88%;
-    border: antiquewhite solid 3px;
-    background-color: antiquewhite;
+    border: white solid 3px;
+    background-color: white;
     outline-color: rgb(0, 162, 255);
     padding: 0.5%;
 }
@@ -159,7 +159,7 @@ body {
 .box-container button {
     border-radius: 10px;
     padding: 8px 10px;
-    border: solid antiquewhite 1px;
+    border: solid white 1px;
     width: 10%;
     padding: 10px;
     background-color: rgb(0, 162, 255);
@@ -235,7 +235,7 @@ body {
     border-radius: 15px;
     height: 380px;
     width: 400px;
-    color: antiquewhite;
+    color: white;
     margin-right: 10px;
     order: 1;
     word-wrap: normal;
@@ -257,7 +257,7 @@ body {
 
 .popup-screen h2 {
     text-align: center;
-    color: antiquewhite;
+    color: white;
     margin: 0%;
     margin-top: 20px;
 }
@@ -270,8 +270,8 @@ body {
     text-align: end;
     background: none;
     outline: none;
-    border-bottom: antiquewhite solid 2px;
-    color: antiquewhite;
+    border-bottom: white solid 2px;
+    color: white;
     margin-bottom: 10px;
 }
 .popup-screen input::placeholder{
@@ -279,7 +279,7 @@ body {
     opacity: 65%;
 }
 .popup-screen button {
-    background-color: antiquewhite;
+    background-color: white;
     font-size: large;
     border-radius: 10px;
     padding: 10px;
@@ -290,7 +290,7 @@ body {
 .popup-screen button:hover{
     background-color: rgb(79, 163, 236);
     transform: scale(1.1);
-    color: antiquewhite;
+    color: white;
 }
 
 .colour-input {
@@ -307,7 +307,7 @@ body {
 }
 
 #colour-selector-name{
-    color: antiquewhite;
+    color: white;
     font-size: larger;
 }
 
@@ -424,7 +424,7 @@ body {
     top: 0%;
     left: 0%;
     background-color: rgb(16, 67, 161);
-    color: antiquewhite;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -517,7 +517,7 @@ body {
         min-height: 50vh;
         height: fit-content;
         width: 80vw;
-        color: antiquewhite;
+        color: white;
         margin-right: 10px;
         order: 2;
         word-wrap: normal;
@@ -572,7 +572,7 @@ body {
     }
 
     .colour-selector{
-        color: antiquewhite;
+        color: white;
         font-size: 42px;
     }
 
@@ -676,7 +676,7 @@ body {
         background-color: rgba(16, 67, 161,0);
         border-radius: 30px;
         box-shadow: 0px 0px 0px;
-        border: solid antiquewhite 5px;
+        border: solid white 5px;
         height: fit-content;
         width: 90vw;
         padding: 15px;
@@ -772,7 +772,7 @@ body {
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: antiquewhite; 
+        background: white; 
         border: solid rgb(16, 67, 161) 7px;
         border-radius: 30px;
     }
