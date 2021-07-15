@@ -20,6 +20,7 @@ socket.on('new-story-line',line => {
     document.getElementById('vote-box').style.display='none';
     document.getElementById('prevent-player').style.display='none'
     document.getElementById('popup-vote').innerHTML = "";
+    document.getElementById('Pactivity-box').pactivityBox.innerHTML += `<hr>new round<hr>`;
     isPlayerVoting =false;
     hasUserBeenFound = false;
     usersVoting = [];
