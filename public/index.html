@@ -30,6 +30,7 @@
     <script src="./socket.js"></script>
     <script>
         var colour = "#62B7D9";
+
         function check() {
             if (document.getElementById('enter-name').value.length == 0) { //enter-name refers to popup textbox
                 alert("For fuck's sake enter your username daug!!!");
@@ -44,6 +45,12 @@
                 });
                 window.onclick = document.getElementById('submit-user').style.display = 'none';
             }
+        }
+        function creator(){
+            window.onclick = document.getElementById('MyCreator').style.display = 'block';
+        }
+        function closepop(){
+            window.onclick = document.getElementById('MyCreator').style.display = 'none';
         }
 
         window.onkeyup = e =>{
@@ -66,6 +73,7 @@
             }
         }
     </script>
+    
     <!-- __________________ Starting Popup ______________ -->
     <div class="popup-container" id="submit-user">
 
@@ -87,22 +95,25 @@
                     <li>Pick a colour and a name</li>
                     <li>Write a story line in continuation with the game</li>
                     <li>Vote the line that you think is the least lame</li>
-                    <li>The highest voted line gets appended to the story</li>
+                    <li>The highest voted line gets added to the story</li>
                     <li>The person who wrote it gets a point</li>
                     <li>Continue this cycle till you get bored of the game</li>
                 </ul>
-            </div>
-            <!-- <div class="creators">
-
-            </div> -->
+            </div> 
         </div>
+
     </div>
     <!-- __________________ Main page ___________________ -->
     <div class="game-title"> 
         <!-- Game title-->
         <div class="title-box">
-            <h1>Story Board</h1>
+            <h1>Story Board</h1> 
         </div>
+        <div class="creator">
+            <button class="info" id="creator-btn" onclick="creator()">About Us</button>
+                <!-- <h2 class="info" id="info">Info</h2></a> -->
+        </div>
+        
     </div> 
 
     <div class="leaderboard" id="leaderboard" >
@@ -128,6 +139,27 @@
             <button class="input-button" onclick="sendStoryLine()">Enter</button>
         </div>
 
+    </div>
+
+    <!-- ______________________POPUP when Clicked on INFO (Creator)________________ -->
+    <div class="pop-creator" id="MyCreator">
+        <div class="creator-box">
+            <span class="close" onclick="closepop()">+</span>
+            
+            <a href="https://ahan.ml/">
+                <img src="Ahan.jpg">
+            <h3 class="ahan">Ahan</h3>
+
+            </a>
+
+            <hr>
+            <a href="https://www.instagram.com/xome_d/">
+                <img src="Dome.jpg">
+            <h3 class="dome">Durgesh</h3>
+
+            </a>
+
+        </div>
     </div>
 
     <!-- _____________________POPUP on clicking enter (Voting box)_________________ -->
