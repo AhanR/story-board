@@ -15,16 +15,112 @@ body {
 
 }
 .game-title{
-    background-color:none;
-    width: 96%;
+    display: flex;
+    justify-content: center;
+    align-content: center; 
+    background-color: none;
+    width: 95%;
     height: 20%;
 }
 .title-box{
+    flex-grow: 1;
     text-shadow: 0 0 3px #494949, 0 0 5px #000000;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     color: whitesmoke;
-   
+ 
+}
+.creator{
+    /* width: 50%; */
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+.creator .info{
+    align-self: center;
+    border: solid white;
+    background-color: transparent;
+    width: 100%;
+    height: 50%;
+    border-radius: 10px;
+    font-size: large;
+    color: white;
+    transition-duration: 00.3s;
+    cursor: pointer;
+}
+.creator .info:hover{
+    transform: scale(1.2);
+}
+.pop-creator{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.336);
+    z-index: 2001;
+    backdrop-filter: blur(2px);
+    display: none;
+}
+.creator-box{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-self: center;
+    width: 25%;
+    height: 35%;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px;
+    background-color: white;
+    position: relative;
+    left: 38%;
+    top: 25%;
+}
+.creator-box img{
+    align-self: center;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 80%;
+    height: 50%;
+}
+.creator-box hr{
+    padding: 1px;
+    border-radius: 10px;
+    background-color: #000000;
+}
+.creator-box .ahan{
+    text-align: center;
+    color: #000000;
+    transition-duration: 00.3s;
+}
+.creator-box .ahan:hover{
+    transform: scale(1.05);
+    color: #263c6b;
+}
+.creator-box .dome{
+    text-align: center;
+    color: #000000;
+    transition-duration: 00.3s;
+}
+.creator-box .dome:hover{
+    transform: scale(1.05);
+    color: #263c6b;
+}
+.close{
+    position: absolute;
+    top: 0%;
+    right: 14px;
+    font-size: 40px;
+    transform: rotate(45deg);
+    z-index: 3001;
+    cursor: pointer;
+    transition-duration: 00.3s;
+}
+.close:hover{
+    transform: scale(1.1);
+    color: rgb(155, 7, 7);
+    transform: rotate(135deg);
 }
 .leaderboard {
     background-color: rgba(16, 67, 161,0.5);
@@ -85,6 +181,7 @@ body {
 
 .box-container {
     background-color: rgba(16, 67, 161,0.5);
+    overflow:auto;
     border-radius: 10px;
     width: 70vw;
     height: 83vh;
@@ -163,6 +260,7 @@ body {
     background-color: rgb(0, 162, 255);
     transition-duration: 00.3s;
     outline-color: rgb(0, 162, 255);
+    cursor: pointer;
 
 }
 .box-container button:hover{
@@ -176,7 +274,7 @@ body {
     justify-content: space-between;
     width: 100%;
 }
-
+/* first popup */
 .popup-container {
     position: fixed;
     background-image: url(user-name-tile.png);
@@ -187,8 +285,10 @@ body {
     
     z-index: 1001;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    align-content: center; 
+    flex-direction: row;
 }
 
 .glass-container{
@@ -238,6 +338,12 @@ body {
     order: 1;
     word-wrap: normal;
 }
+.rule-box hr{
+    width: 100%;
+    height: 0.5%;
+    border-radius: 3px;
+    background-color: white;
+} 
 
 .popup-screen {
     /*maintain 3:2 width:height*/
@@ -318,6 +424,7 @@ body {
     width: 100px;
     transform: scale(1.2);
 }
+
 
 /* vote-box */
 .pop-back {
@@ -582,6 +689,75 @@ body {
         height: 100%;
     }
 
+    /* creator pop-up */
+    .pop-creator{
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color:rgba(0, 0, 0, 0.336);
+        z-index: 2001;
+        backdrop-filter: blur(2px);
+        display: none;
+    }
+    .creator-box{
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-self: center;
+        width: 80%;
+        height: 30%;
+        border-radius: 20px;
+        box-shadow: 0px 5px 15px;
+        background-color: white;
+        position: relative;
+        left: 10%;
+        top: 25%;
+    }
+    .creator-box img{
+        align-self: center;
+        padding-top: 40px;
+        padding-left: 40px;
+        width: 80%;
+        height: 60%;
+    }
+    .creator-box hr{
+        padding: 1px;
+        border-radius: 10px;
+        background-color: #000000;
+    }
+    .creator-box .ahan{
+        text-align: center;
+        font-size: 50px;
+        color: #000000;
+        transition-duration: 00.3s;
+    }
+    .creator-box .ahan:hover{
+        transform: scale(1.05);
+        color: #263c6b;
+    }
+    .creator-box .dome{
+        text-align: center;
+        font-size: 50px;
+        color: #000000;
+        transition-duration: 00.3s;
+    }
+    .creator-box .dome:hover{
+        transform: scale(1.05);
+        color: #263c6b;
+    }
+    .close{
+        position: absolute;
+        top: 0%;
+        right: 14px;
+        font-size: 80px;
+        transform: rotate(45deg); 
+        z-index: 3001;
+        cursor: pointer;
+        transition-duration: 00.3s;
+    }
+
     body {
         background-image: url(in-game-tile.png);
         background-size: 800px;
@@ -790,4 +966,5 @@ body {
         }
       }
 }
+
 
